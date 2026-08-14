@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>SHAURYA GARG — Full-Stack Developer &amp; Digital Strategy Specialist</title>
+<meta name="description" content="Retro 8-bit desktop portfolio of Shaurya Garg — BCA @ CHRIST (Deemed to be University), Full-Stack Developer &amp; Digital Strategy Specialist. Projects, certificates and contact." />
+<meta name="theme-color" content="#111214" />
+<meta property="og:title" content="SHAURYA GARG — Retro Desktop Portfolio" />
+<meta property="og:description" content="Walk the desktop. Open the folders. Full-stack projects, verified certificates and skills." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // ── Tailwind theme extension ───────────────────────────────────────────────
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          pixel: ["'Press Start 2P'", "ui-monospace", "monospace"],
+          sans: ["'Space Grotesk'", "system-ui", "sans-serif"],
+        },
+        colors: {
+          ink:    "#111214",
+          paper:  "#f2f2ef",
+          card:   "#fbfbf9",
+          blue:   "#2f6fd0",
+          rust:   "#d63c2f",
+          gold:   "#dc9b1c",
+          leaf:   "#3f9d4f",
+          lilac:  "#e3a7f2",
+          grid:   "#d6d6cf",
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   1. TOKENS
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#111214;
+  --ink-soft:#4b4d52;
+  --paper:#f2f2ef;
+  --card:#fbfbf9;
+  --line:#111214;
+  --grid:#d8d8d1;
+  --blue:#2f6fd0;
+  --rust:#d63c2f;
+  --gold:#dc9b1c;
+  --leaf:#3f9d4f;
+  --lilac:#e3a7f2;
+  --green-bar:#4caf50;
+  --shadow:6px 6px 0 var(--ink);
+  --shadow-sm:3px 3px 0 var(--ink);
+  --desk-pad:clamp(12px,3vw,40px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2. BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:#0b0b0c;
+  color:var(--ink);
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+  overscroll-behavior:none;
+}
+.font-pixel{font-family:'Press Start 2P',ui-monospace,monospace}
+img.pixel,canvas.pixel{image-rendering:pixelated;image-rendering:crisp-edges}
+::selection{background:var(--lilac);color:var(--ink)}
+
+/* thin retro scrollbars inside panels */
+.scroll-retro{scrollbar-width:thin;scrollbar-color:var(--ink) transparent}
+.scroll-retro::-webkit-scrollbar{width:10px;height:10px}
+.scroll-retro::-webkit-scrollbar-track{background:transparent}
+.scroll-retro::-webkit-scrollbar-thumb{background:var(--ink);border:2px solid var(--paper)}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. THE OS WINDOW
+   ═══════════════════════════════════════════════════════════════════════════ */
+#os{
+  position:fixed;inset:0;
+  margin:var(--desk-pad);
+  border:3px solid var(--line);
+  border-radius:4px;
+  background:var(--paper);
+  background-image:radial-gradient(circle,var(--grid) 1.2px,transparent 1.2px);
+  background-size:22px 22px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+@media (max-width:640px){
+  :root{--desk-pad:8px;--shadow:4px 4px 0 var(--ink)}
+}
+
+/* home-indicator bar, straight from the reference */
+.home-bar{
+  position:absolute;left:50%;bottom:7px;transform:translateX(-50%);
+  width:74px;height:5px;border-radius:99px;background:var(--ink);opacity:.65;
+  z-index:6;pointer-events:none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. BOOT / LOADING SCREEN
+   ═══════════════════════════════════════════════════════════════════════════ */
+#boot{
+  position:absolute;inset:0;z-index:60;
+  background:var(--paper);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:clamp(24px,7vh,70px);
+  transition:opacity .45s steps(6,end),visibility .45s;
+}
+#boot.done{opacity:0;visibility:hidden}
+.boot-title{font-size:clamp(10px,2.2vw,15px);letter-spacing:.22em}
+.bar-shell{
+  width:min(58vw,420px);height:26px;margin-top:16px;
+  border:4px solid var(--ink);background:#101215;padding:3px;
+}
+.bar-fill{height:100%;width:0%;background:var(--green-bar);transition:width .12s steps(4,end)}
+.boot-pct{margin-top:12px;font-size:clamp(9px,1.8vw,13px)}
+#bootSprite{margin-top:clamp(26px,7vh,64px);animation:bob 1.1s steps(2,end) infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.boot-skip{position:absolute;bottom:26px;font-size:8px;letter-spacing:.18em;opacity:.45}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. DESKTOP HUB
+   ═══════════════════════════════════════════════════════════════════════════ */
+#desk{position:relative;flex:1;min-height:0;overflow:hidden}
+/* side padding keeps the centred title clear of the floating navigate pill */
+.desk-head{padding:clamp(14px,3.2vh,30px) clamp(20px,13vw,150px) 0;text-align:center;pointer-events:none}
+.desk-name{
+  font-size:clamp(15px,4.4vw,40px);
+  letter-spacing:clamp(.10em,1.1vw,.20em);
+  line-height:1.25;
+  text-shadow:2px 2px 0 rgba(17,18,20,.14);
+}
+.desk-sub{margin-top:12px;font-size:clamp(6px,1.35vw,10px);letter-spacing:.2em;color:var(--ink-soft)}
+.desk-foot{
+  position:absolute;left:0;right:0;bottom:22px;text-align:center;
+  font-size:clamp(6px,1.15vw,8px);letter-spacing:.18em;color:var(--ink-soft);
+  pointer-events:none;z-index:2;
+}
+
+/* folder row — one row on desktop, wrapping into centred rows on small screens */
+#folders{
+  position:absolute;left:0;right:0;bottom:clamp(58px,13vh,120px);
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;
+  gap:clamp(18px,3.4vw,58px) clamp(14px,2.6vw,46px);
+  padding:0 12px;max-width:1040px;margin:0 auto;z-index:3;
+}
+@media (max-width:620px){ #folders{max-width:352px;gap:24px 20px} }
+body.touch #folders{bottom:clamp(118px,20vh,190px)}
+.folder{
+  position:relative;background:none;border:0;padding:6px 4px 0;cursor:pointer;
+  width:clamp(100px,12vw,140px);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  transition:transform .16s steps(3,end);
+  -webkit-tap-highlight-color:transparent;
+}
+.folder canvas{width:clamp(58px,11vw,104px);height:auto;display:block;transition:transform .16s steps(3,end)}
+.folder-label{font-size:clamp(6px,1.25vw,10px);letter-spacing:.16em;white-space:nowrap}
+.folder:hover,.folder:focus-visible,.folder.near{transform:translateY(-8px);outline:none}
+.folder:hover canvas,.folder.near canvas{transform:scale(1.06)}
+.folder.near .folder-label{text-decoration:underline;text-underline-offset:4px}
+/* dwell-to-open charge meter */
+.charge{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  width:52px;height:8px;border:2px solid var(--ink);background:#fff;
+  opacity:0;transition:opacity .15s
+}
+.folder.near .charge{opacity:1}
+.charge i{display:block;height:100%;width:0;background:var(--ink)}
+
+/* the player sprite */
+#player{
+  position:absolute;left:0;top:0;z-index:4;
+  width:clamp(46px,8vw,74px);
+  aspect-ratio:18/28;             /* correct metrics before the sprite decodes */
+  transform-origin:50% 100%;
+  will-change:transform;
+  filter:drop-shadow(0 6px 0 rgba(17,18,20,.10));
+  pointer-events:none;
+}
+#playerHint{
+  position:absolute;z-index:5;transform:translate(-50%,-100%);
+  font-size:7px;letter-spacing:.14em;background:var(--ink);color:#fff;
+  padding:5px 7px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. NAVIGATE PILL + SIDE MENU
+   ═══════════════════════════════════════════════════════════════════════════ */
+#navBtn{
+  position:absolute;top:14px;right:14px;z-index:45;
+  background:var(--lilac);color:var(--ink);
+  border:2px solid var(--ink);border-radius:99px;
+  padding:9px 18px;font-size:11px;font-weight:700;cursor:pointer;
+  box-shadow:var(--shadow-sm);
+  transition:transform .12s steps(2,end),box-shadow .12s steps(2,end);
+}
+#navBtn:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+#navBtn:active{transform:translate(3px,3px);box-shadow:none}
+/* panels carry their own navigate control — hide the floating one behind them */
+#overlay.on ~ #navBtn{display:none}
+
+@media (max-width:700px){
+  /* drop the title below the pill instead of squeezing it */
+  .desk-head{padding:56px 14px 0}
+  .desk-name{font-size:clamp(16px,6vw,30px)}
+  .foot-long{display:none}
+}
+
+#menu{
+  position:absolute;top:0;right:0;bottom:0;z-index:50;
+  width:min(320px,84vw);
+  background:var(--card);border-left:3px solid var(--ink);
+  transform:translateX(103%);
+  transition:transform .32s steps(6,end);
+  display:flex;flex-direction:column;
+  box-shadow:-8px 0 0 rgba(17,18,20,.07);
+}
+#menu.open{transform:translateX(0)}
+.menu-item{
+  display:flex;align-items:center;gap:12px;width:100%;
+  padding:15px 18px;border:0;border-bottom:2px solid var(--ink);
+  background:transparent;text-align:left;cursor:pointer;
+  font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.1em;
+  transition:background .12s,padding-left .12s steps(2,end);
+}
+.menu-item:hover,.menu-item:focus-visible{background:var(--ink);color:var(--card);padding-left:26px;outline:none}
+.menu-dot{width:10px;height:10px;border:2px solid currentColor;flex:none}
+#scrim{position:absolute;inset:0;z-index:48;background:rgba(17,18,20,.35);opacity:0;visibility:hidden;transition:opacity .25s}
+#scrim.on{opacity:1;visibility:visible}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7. SECTION PANELS
+   ═══════════════════════════════════════════════════════════════════════════ */
+#overlay{position:absolute;inset:0;z-index:30;visibility:hidden}
+#overlay.on{visibility:visible}
+.panel{
+  position:absolute;inset:0;display:none;flex-direction:column;
+  background:var(--paper);
+  background-image:radial-gradient(circle,var(--grid) 1.2px,transparent 1.2px);
+  background-size:22px 22px;
+}
+.panel.active{display:flex}
+.panel-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px clamp(14px,3vw,34px);border-bottom:3px solid var(--ink);
+  background:var(--card);flex:none;
+}
+.panel-title{font-size:clamp(9px,2vw,14px);letter-spacing:.16em}
+.btn-x{
+  border:2px solid var(--ink);background:var(--card);cursor:pointer;
+  font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.1em;
+  padding:9px 13px;box-shadow:var(--shadow-sm);
+  transition:transform .12s steps(2,end),box-shadow .12s steps(2,end);
+}
+.btn-x:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.btn-x:active{transform:translate(3px,3px);box-shadow:none}
+.panel-body{flex:1;min-height:0;overflow-y:auto;padding:clamp(20px,4vw,46px) clamp(16px,4vw,54px) 90px}
+.panel-inner{max-width:1080px;margin:0 auto}
+
+/* prose */
+.lede{font-size:clamp(19px,2.6vw,30px);font-weight:700;line-height:1.35;letter-spacing:-.01em}
+.copy{font-size:clamp(14px,1.55vw,17px);font-weight:500;line-height:1.62;color:#1c1e22}
+.eyebrow{font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.18em;color:var(--ink-soft)}
+
+/* generic retro card */
+.rcard{
+  background:var(--card);border:3px solid var(--ink);box-shadow:var(--shadow);
+  transition:transform .14s steps(2,end),box-shadow .14s steps(2,end);
+}
+.rcard:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
+
+/* badges */
+.badge{
+  display:inline-block;border:2px solid var(--ink);background:#fff;
+  font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:.06em;
+  padding:5px 7px;line-height:1.35;white-space:nowrap;
+}
+.badge-solid{background:var(--ink);color:var(--card)}
+
+/* link buttons */
+.lbtn{
+  display:inline-flex;align-items:center;gap:7px;
+  border:2px solid var(--ink);background:var(--card);
+  font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.08em;
+  padding:9px 11px;box-shadow:var(--shadow-sm);text-decoration:none;color:var(--ink);
+  transition:transform .12s steps(2,end),box-shadow .12s steps(2,end),background .12s;
+}
+.lbtn:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink);background:var(--lilac)}
+.lbtn:active{transform:translate(3px,3px);box-shadow:none}
+.lbtn[aria-disabled="true"]{opacity:.42;pointer-events:none;box-shadow:none}
+
+/* featured project */
+.featured{border-width:4px;box-shadow:8px 8px 0 var(--ink)}
+.featured:hover{transform:translate(2px,2px);box-shadow:5px 5px 0 var(--ink)}
+.ribbon{
+  display:inline-flex;align-items:center;gap:8px;background:var(--gold);
+  border:2px solid var(--ink);padding:6px 10px;
+  font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.1em;
+}
+.star{animation:blink 1.4s steps(2,end) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.25}}
+
+/* language dot */
+.langdot{width:10px;height:10px;border:2px solid var(--ink);display:inline-block;flex:none}
+
+/* stat tiles */
+.stat{border:3px solid var(--ink);background:var(--card);padding:14px 12px;text-align:center}
+.stat b{display:block;font-family:'Press Start 2P',monospace;font-size:clamp(11px,1.7vw,16px)}
+.stat span{display:block;margin-top:8px;font-size:9px;letter-spacing:.12em;color:var(--ink-soft);font-family:'Press Start 2P',monospace}
+
+/* certificate seal */
+.seal{
+  width:38px;height:38px;flex:none;border:3px solid var(--ink);background:var(--leaf);
+  display:grid;place-items:center;color:#fff;font-family:'Press Start 2P',monospace;font-size:13px;
+}
+
+/* contact */
+.handle-pill{
+  display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:#fff;
+  border-radius:99px;padding:8px 24px 8px 8px;box-shadow:var(--shadow);
+}
+.handle-pill img{width:46px;height:46px;border-radius:99px;border:2px solid #fff}
+.social{
+  position:relative;width:clamp(56px,10vw,74px);height:clamp(56px,10vw,74px);
+  border-radius:99px;border:3px solid var(--ink);background:#fff;
+  display:grid;place-items:center;cursor:pointer;text-decoration:none;
+  transition:transform .14s steps(2,end),background-color .14s;
+}
+.social svg{width:46%;height:46%;transition:fill .14s}
+.social:hover{transform:translateY(-6px)}
+.social:hover svg{fill:#fff !important}
+.social .tip{
+  position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);
+  font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:.08em;
+  color:#fff;padding:5px 7px;white-space:nowrap;opacity:0;transition:opacity .14s;
+  border:2px solid var(--ink);
+}
+.social:hover .tip{opacity:1}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8. PIXEL WIPE TRANSITION
+   ═══════════════════════════════════════════════════════════════════════════ */
+#wipe{position:absolute;inset:0;z-index:55;display:grid;pointer-events:none;visibility:hidden}
+#wipe.on{visibility:visible;pointer-events:auto}
+#wipe i{background:var(--ink);transform:scale(0);transition:transform .22s steps(2,end)}
+#wipe.cover i{transform:scale(1.02)}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   9. MOBILE D-PAD
+   ═══════════════════════════════════════════════════════════════════════════ */
+#dpad{position:absolute;left:14px;bottom:14px;z-index:20;display:none;
+  grid-template-columns:repeat(3,42px);grid-template-rows:repeat(3,42px);gap:4px;opacity:.92}
+#dpad button{
+  border:2px solid var(--ink);background:var(--card);font-family:'Press Start 2P',monospace;
+  font-size:11px;cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent;
+}
+#dpad button:active{background:var(--ink);color:var(--card)}
+body.touch #dpad{display:grid}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   10. UTILITIES / MOTION
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fade-up{opacity:0;transform:translateY(14px);animation:fadeUp .42s ease-out forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ══ THE OS WINDOW ═══════════════════════════════════════════════════════ -->
+<main id="os">
+
+  <!-- ── LOADING SCREEN ──────────────────────────────────────────────────── -->
+  <div id="boot">
+    <div class="font-pixel boot-title">LOADING</div>
+    <div class="bar-shell"><div class="bar-fill" id="bootBar"></div></div>
+    <div class="font-pixel boot-pct" id="bootPct">0%</div>
+    <img id="bootSprite" class="pixel" alt="Pixel-art avatar of Shaurya Garg" width="96" />
+    <div class="font-pixel boot-skip">CLICK ANYWHERE TO SKIP</div>
+  </div>
+
+  <!-- ── DESKTOP HUB ─────────────────────────────────────────────────────── -->
+  <section id="desk">
+    <header class="desk-head">
+      <h1 class="font-pixel desk-name">SHAURYA GARG</h1>
+      <p class="font-pixel desk-sub">START BY WALKING OVER A FOLDER — OR JUST CLICK</p>
+    </header>
+
+    <img id="player" class="pixel" alt="" aria-hidden="true" />
+    <div id="playerHint" class="font-pixel"></div>
+
+    <nav id="folders" aria-label="Desktop folders"></nav>
+
+    <p class="font-pixel desk-foot">WASD / ARROW KEYS TO MOVE &nbsp;·&nbsp; ENTER TO OPEN<span class="foot-long"> &nbsp;·&nbsp; ESC TO GO BACK</span></p>
+
+    <div id="dpad" aria-hidden="true">
+      <span></span><button data-dir="up">▲</button><span></span>
+      <button data-dir="left">◀</button><span></span><button data-dir="right">▶</button>
+      <span></span><button data-dir="down">▼</button><span></span>
+    </div>
+  </section>
+
+  <!-- ── SECTION OVERLAY ─────────────────────────────────────────────────── -->
+  <div id="overlay" role="dialog" aria-modal="true" aria-label="Section content"></div>
+
+  <!-- ── NAVIGATE + MENU ─────────────────────────────────────────────────── -->
+  <button id="navBtn" type="button" aria-expanded="false" aria-controls="menu">navigate</button>
+  <div id="scrim"></div>
+  <aside id="menu" aria-label="Site menu">
+    <div class="flex items-center gap-3 p-4 border-b-[3px] border-ink">
+      <img id="menuAvatar" class="pixel" width="44" height="44"
+           style="border:2px solid #111214" alt="Pixel portrait of Shaurya Garg" />
+      <div>
+        <div class="font-pixel" style="font-size:9px;letter-spacing:.1em">SHAURYA GARG</div>
+        <div class="font-pixel" style="font-size:7px;letter-spacing:.1em;color:#4b4d52;margin-top:6px">BCA · CHRIST UNIV.</div>
+      </div>
+    </div>
+    <div id="menuList" class="flex-1 overflow-y-auto scroll-retro"></div>
+    <div class="p-4 border-t-[3px] border-ink flex items-center justify-between gap-3">
+      <button id="soundBtn" class="font-pixel" type="button"
+              style="font-size:8px;letter-spacing:.1em;border:2px solid #111214;padding:8px 10px;background:#fbfbf9;cursor:pointer">
+        SOUND: ON
+      </button>
+      <span class="font-pixel" style="font-size:7px;color:#4b4d52">v1.0</span>
+    </div>
+  </aside>
+
+  <!-- ── PIXEL WIPE ──────────────────────────────────────────────────────── -->
+  <div id="wipe" aria-hidden="true"></div>
+
+  <div class="home-bar"></div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 0 — CONFIG + DATA
+   Everything editable lives here.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  name:     "SHAURYA GARG",
+  github:   "https://github.com/Shauurrya",
+  ghUser:   "Shauurrya",
+  linkedin: "https://www.linkedin.com/in/shaurya-garg-82925a34b/",
+  email:    "shauryagargynr007@gmail.com",
+  certDir:  "certificates/",           // optional local folder with the PDFs
+};
+
+/* Pixel-art portrait generated from Shaurya's photo (56×56, posterised). */
+const AVATAR_SRC = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAIAUlEQVR4Aeya3c3jNhBFhZTjevzgavbB9bgeV7NAcs4MKZKyZEvyboAssuCQ88fhvSRl+Uv818+fP//+k+Wv6Q//9z/B//oB/8YTfE7P57r8m5v2SwlK6PF4TPf7fbrd7oy3FdF/n8wz/3eT/ZqgIAUrKeUBOW39HCCnOA2iYdzc280N+L1kvyL4fOZpCVgJUh+O5LmIO0+yjjHfXVnkfGOeJiig+/3BgeRzxjmBQ/gK6sGW9fI01SV7sMRq+imC7riSICSk1PqXqmyMfe6YYj3JKerKmHHcOkxQYgLIpQQrISU940kaV2rMsc+dptEyTgWu6ZMPKy3uh8NpOURwJOeaFd6ShLF9sjXzAUnXez6giL6v2mvWboKempIlhNVLerd7c7ejnBlBcxTU0ryibc3iPDjsIjguNIKY19O9lAh6ykoYG10fr0Uyta7tmJ5j/UeCFr7zvnLMnS4LiKOok7oYl7L6hNVJy9HJ1dfr01dfCj4S9IqIvy4dZKrDUQk8dkuZZ71RLFDFNGtoqzcJHCeexY8E28m5KIvT4mD6MXAYrxKOl+7CnOuLXCiXkhOsQVIacy8OSc6OncpbghblTU4pF1RQbWKooq1oO66IMyUnDV8MF4wQqDUbTX/4Vorg8ptTYELf2z4SHHB7P0dHPpbVF6N02vJa4J6udLRJySgRDFqhVOinu/gys/be0KOn+JbgWCzQs80sB4hVBPoJ21QDPJ2npW9zMsmkURKl9Jn/2nuCymtk3bNJcLwOkKN5gCFrtcRW/KoVsGMjVhIYzGEYG845H30MpnWEnDM2CT74BmHCqlSygijiBVP8EMkTwzLGiazWeOOUZEzdyDlCcpPgWPvdchCBRICiC4t0VEqg0C9b9eaY/TJntN3R5vn1BH26W/1Ogw74KpkYsbuEWY1YtcxBGmyMGpvH6qtZdTSh17W3ZfME85o58X2xhJFEzW6SkbCryihR90uJGA81X6fjbeRT4em4onlK5tTeCB/cJJpXve/GTYJtEqia0TTctNkWsMs3qRopqMbhEkTw0KCF078afN4TMIlG8Gtn/eydS4jGPPq9bQfBXPR9QRYVlDtbBRsVQs4fRfCEwfz06c13JJ9O+a68hJ0vzHozCsnJf6lbQ+uTbBJsV3RRIuvjRKEFUPGjgzbfCET1wy5IhI4vgyZyzYjoYmscdJg+i2GvaGaTEkp0wX0TH6l9e0swi1xcq80pZHIp3CjmsdfwKz3I9AUSUiThjoeM1YjKLTKIWLwKftWoZRoLOSDX6w9KNxvXZtsk6IwAifJaCk+2IEUKrYEU1wTcPA5CpYGV/DSYngrJnnAvc0CFuKVUneM1vl6vmrtkF8FAZfWuZJr2hVgBkkDxafeMurm96iZaxVTBx1qRwG0wgG5MNXIPkGPq9JagO6XMz06sguU4IwGIlYoEGOIx1q2PGM6YQ74qOhoRPmhInnX92pFDOEY6m4LrSHtL0EISdGepjWmPeDoD+CQNLuCh0ydg+xQm0yTDEK3qxCkZc+loEX3pYk28mwnEVtpHgl6L648fPNQCX6kQLhBCKjPUw/mhy7xXvPqVnD5rs5L+vf1HghZKEGWncdTNnMopGt+S4M2cGV+ZbL7PKyGa0SqY0bRDiY7VGemdiLa37SLoyXiSq0VHHCVFp4JZCKFlK+40tnonKYv4QXLO3kmQ1ABGlw1HaSs4SqQMJYF5xcGQRsNrTi+kLJq5m5u8yO3N3QQvl3z3JLR6ObOU0FKrvR5F22tFfjHzWhbD8Cy18uwIJfNV1+NG3sluglGkrOFuhl078AYQxupqo+/EV2lfsGtmN7lTa/TsuJug1yNPUZZKW1IrSKs096jNsUQf+VN1OiplSqfqufBF/MILXgzaR2Q3QYv6TnSRBMe108knaUIO46UzPz6kIiLyKnhVw2+3XeXC45F1zDsmhwhGadj5N5xfnMOunfiUag8jVzTsMSGu9Yo/XHSRPWwCzoPtMEH4xXfoWCcQhMY5lhPtfehuBMOUOPMDp+rOiDgJtCzU98Xpmr37iH6YIBeLbzVCzD+jEkP2sbAhzAAObdRCzigniYMeA6X0YbfjxAv1DDPXgkq4D3eHCfosLJ/Ft6sCNLELUjGbkwS6m5WW/YZ8c3yUPEyQOZMEFWFqp8AEJcgEj4yKTyHUUeKEdHDCJQsrJjGOzQ0dPcesUwRdIggW5ElNb5HZIWhFvxfxObUPqDkpidc0UmOTGOP1UNbAPNVOExxWAysNl71EUIfW0HsiSl5Pzs+QUvKTnHXIuOS3pxI6NXxNcMYGJloB0bTi4JQgY88ED6VKjS/HtW1a5uyxTxOMT8ncbra6LAWv6qpPWYlkDuRme6Ewtbx+oIbhdixSTpmnCcavnPiQcNUeN9gCqGNPUuIhTMgYCk1dsRTUYi5uGpYT0L5ppwjm6T3GdWeWADMCavGlhSGD4pdF1sBBUurk0PDwnrXPHx+kdr4/RXD8H6O5ePCj82r5FUBigZcODkEvffTVR4Am3yxC77PJUPK5AyboOCmHCLrTt/i5JAhdsAyqCvzyWfPDRAcwoUMv0E6Ipd8C/MenyGBqFCBYG2H/rKrmmfEjQRe4Px7xA1d/5OpPq4Aaa7F+jNklOvs8hTzLsIOA2U3S78zULg6aC3k8WTs2NX/ZuAh/NDcJxmndyg9Wy88mk5ggW93REqVSTkM12FaybSSDIiag5TDbKFzb4mQBNzU2GRzx+7UD1/YfAAAA//+AYtQAAAAABklEQVQDAIROPyW9hxSzAAAAAElFTkSuQmCC";
+
+/* ── Desktop folders ─────────────────────────────────────────────────────── */
+const FOLDERS = [
+  { id:"about",   label:"About Me",     color:"#2f6fd0", dark:"#1d4c92", tab:"#6b4a2b" },
+  { id:"work",    label:"Experience",   color:"#7b4fd0", dark:"#5432a0", tab:"#6b4a2b" },
+  { id:"projects",label:"All Projects", color:"#d63c2f", dark:"#9c281e", tab:"#6b4a2b" },
+  { id:"certs",   label:"Certificates", color:"#3f9d4f", dark:"#2b7038", tab:"#6b4a2b" },
+  { id:"contact", label:"Contact",      color:"#dc9b1c", dark:"#a67012", tab:"#6b4a2b" },
+];
+
+/* ── Work experience &amp; internships ─────────────────────────────────────── */
+const EXPERIENCE = [
+  {
+    org:"Clever Harvey — JuniorMBA Program",
+    role:"Digital Marketing Consultant",
+    meta:"Client brand: Puma",
+    points:[
+      "Acted as digital marketing consultant for Puma under the JuniorMBA program, applying strategic marketing frameworks to a real-world brand challenge.",
+      "Evaluated brand positioning and campaign strategy, translating classroom frameworks into actionable recommendations.",
+    ],
+    tags:["Digital Marketing Strategy","Brand Positioning","Campaign Strategy","Market Research"],
+  },
+  {
+    org:"Corizo Edutech",
+    role:"Research Intern — Nano Technology &amp; Genetic Engineering",
+    meta:"With an associated technical training program affiliated with IIT Bombay",
+    points:[
+      "Completed a research internship exploring nanotechnology and genetic engineering concepts, sharpening analytical thinking and problem-solving skills.",
+      "Completed the associated technical training program affiliated with IIT Bombay, covering advanced technical concepts, engineering principles and research foundations.",
+    ],
+    tags:["Research &amp; Analysis","Nanotechnology","Genetic Engineering","IIT Bombay Training"],
+  },
+];
+
+const ACHIEVEMENTS = [
+  "Built <b>CivicLedgerX</b>, a full-stack voice-enabled Financial ERP prototype, inside a 4-hour window at DotXathon 2026.",
+  "Earned an <b>&lsquo;Elite&rsquo; category</b> certification (top-performing cohort) in NPTEL&rsquo;s E-Business course — weekly assignments plus a proctored final exam.",
+  "Represented <b>CHRIST University</b> at a National Level Online Essay Writing Competition.",
+  "Technical volunteer with <b>Tech Tank</b> under the CAPS credit course at CHRIST (Deemed to be University).",
+];
+
+/* ── Featured hackathon project ──────────────────────────────────────────── */
+const FEATURED = {
+  name: "CivicLedgerX",
+  tagline: "Voice-Enabled Financial ERP System",
+  event: "DotXathon 2026 · CHRIST (Deemed to be University) · built in a 4-hour hackathon",
+  team: "5-member team with Ishwaak Saraogi, Yash Raj Rajawat, Neel Poddar and Shashwat Dwivedi",
+  desc: "A financial ERP designed and delivered inside a four-hour hackathon window: accountants "
+      + "speak an instruction and the assistant performs the ledger or entry action hands-free, "
+      + "while every transaction is guarded by role-based permissions, device-bound authentication "
+      + "and an AI layer that flags suspicious activity in real time.",
+  bullets: [
+    "Voice assistant that inserts journal entries, records payments, purchases and sales, adds ledger records and navigates the app hands-free",
+    "Role-Based Access Control across multiple organizations",
+    "Secure OTP authentication with device-level IP / MAC restrictions",
+    "AI-powered fraud-detection logic over transaction streams",
+    "Business simulation engine projecting future financial outcomes",
+    "Real-time analytics dashboard with graphical reporting",
+    "Shipped twice: a web build (ASP.NET, Node.js, React, Python for AI) and a desktop prototype (Visual Studio 2022, C#, .NET Framework 4.8 — Windows Forms)",
+  ],
+  stack: ["ASP.NET",".NET Framework 4.8","C#","Windows Forms","Node.js","React","Python","Visual Studio 2022"],
+  repo: CONFIG.github,
+  repoLabel: "GITHUB PROFILE",
+  demo: null,
+  note: "Hackathon build — repository kept private, access on request.",
+};
+
+/* ── Curated repo copy. Live GitHub data is merged over this at runtime. ─── */
+const REPOS = [
+  {
+    name:"VitalCoreAI",
+    desc:"Biometric analytics and recovery engine for Android. Interfaces with Health Connect "
+       + "(plus Samsung Health / Google Fit) to compute Readiness, Recovery, Day Strain, Sleep Debt, "
+       + "Biological Age and ACWR training load — without a subscription wearable.",
+    stack:["Kotlin","Android","Health Connect","MIT"],
+    lang:"Kotlin",
+    repo:"https://github.com/Shauurrya/VitalCoreAI",
+    demo:"https://github.com/Shauurrya/VitalCoreAI/releases/latest",
+    demoLabel:"DOWNLOAD APK",
+  },
+  {
+    name:"inventra",
+    desc:"Cloud inventory-management SaaS aimed at Indian manufacturing MSMEs: raw-material tracking, "
+       + "Bill-of-Materials production deductions, finished-goods and sales management, and low-stock alerts.",
+    stack:["TypeScript","Next.js 14","PostgreSQL","Prisma"],
+    lang:"TypeScript",
+    repo:"https://github.com/Shauurrya/inventra",
+    demo:"https://inventra-pi.vercel.app/",
+  },
+  {
+    name:"F1-2026-Intelligence",
+    desc:"Formula 1 race-intelligence dashboard. Bundles a Bayesian engine, ML pace regression, "
+       + "Markov lap simulation, aero and engine models, live data feeds, grid-penalty prediction "
+       + "and a fantasy calculator into one browser app.",
+    stack:["JavaScript","Python","Data Modelling","Charts"],
+    lang:"JavaScript",
+    repo:"https://github.com/Shauurrya/F1-2026-Intelligence",
+    demo:"https://shauurrya.github.io/F1-2026-Intelligence/",
+  },
+  {
+    name:"student-marks-dashboard",
+    desc:"Interactive student marks analysis dashboard in Streamlit: CSV upload with validation and a "
+       + "sample template, KPI metrics, subject-wise trend visualisation and individual progress tracking.",
+    stack:["Python","Streamlit","Pandas","Data Viz"],
+    lang:"Python",
+    repo:"https://github.com/Shauurrya/student-marks-dashboard",
+    demo:null,
+  },
+  {
+    name:"RetroArcadeOS",
+    desc:"Browser-based retro desktop OS and arcade engine written in vanilla JavaScript — custom "
+       + "pixel-sprite and world systems, progression, shop and sound engines, shipped as an "
+       + "installable PWA. The spiritual ancestor of the site you are reading.",
+    stack:["JavaScript","Canvas","PWA","CSS"],
+    lang:"JavaScript",
+    repo:"https://github.com/Shauurrya/RetroArcadeOS",
+    demo:null,
+  },
+  {
+    name:"pooja-jaiswwal-garg-synergy",
+    desc:"Blog and practice website built for Pooja Jaiswal Garg, a professional counsellor — "
+       + "content-first layout, responsive across devices, deployed on Vercel.",
+    stack:["HTML5","CSS3","JavaScript","Vercel"],
+    lang:"CSS",
+    repo:"https://github.com/Shauurrya/pooja-jaiswwal-garg-synergy",
+    demo:"https://pooja-jaiswwal-garg-synergy.vercel.app/",
+  },
+  {
+    name:"Advanced-Java-Lab",
+    desc:"Complete set of Advanced Java lab programs (Lab 1 – Lab 9) from the BCA curriculum, "
+       + "organised per lab with build scripts.",
+    stack:["Java","Batchfile","OOP"],
+    lang:"Java",
+    repo:"https://github.com/Shauurrya/Advanced-Java-Lab",
+    demo:null,
+  },
+  {
+    name:"streamlitdeploy",
+    desc:"Deployment sandbox used for hosting and testing Streamlit builds.",
+    stack:["Python","Streamlit","Deployment"],
+    lang:"Python",
+    repo:"https://github.com/Shauurrya/streamlitdeploy",
+    demo:null,
+  },
+];
+
+/* ── Certificates ────────────────────────────────────────────────────────── */
+const CERTS = [
+  { title:"JuniorMBA in Digital Marketing", issuer:"Clever Harvey",
+    meta:"Client brand: Puma", file:"clever-harvey-juniormba.pdf",
+    tags:["Digital Marketing","Brand Positioning","Market Research"] },
+  { title:"Research Internship &amp; Training in Nano Technology &amp; Genetic Engineering",
+    issuer:"Corizo Edutech", meta:"IIT Bombay affiliate", file:"corizo-nanotech-genetic-engineering.pdf",
+    tags:["Nanotechnology","Genetic Engineering","Research"] },
+  { title:"Technical Training Certificate (IIT Bombay)", issuer:"Corizo Edutech",
+    meta:"Issued 16 Aug 2025 · valid for lifetime", file:"corizo-iit-bombay-training.jpeg",
+    tags:["Technical Training","Engineering Principles","Research Foundations"] },
+  { title:"NPTEL &lsquo;Elite&rsquo; Certification in E-Business", issuer:"NPTEL",
+    meta:"Elite grade · Jul–Oct 2025 · weekly assignments + proctored final exam", file:null,
+    tags:["E-Business","Systems","Strategy"] },
+  { title:"Introducing Coding for Beginners — an HTML Online Course", issuer:"The Lead Origin",
+    meta:"7 Sep – 7 Oct 2021 · instructor Mr. Shubham Kaushik", file:"leadorigin-html-course.jpeg",
+    tags:["HTML","Web Fundamentals"] },
+  { title:"Android Mobile App Development — Gamecraft Workshop", issuer:"CHRIST (Deemed to be University), Bengaluru",
+    meta:"Hands-on mobile development workshop", file:null,
+    tags:["Android","Mobile Development","Workshop"] },
+  { title:"Digital Productivity Certificate", issuer:"NIIT Foundation &amp; UNICEF",
+    meta:"Digital productivity suite", file:"digital-productivity-niit-unicef.pdf",
+    tags:["Productivity Suite","Digital Literacy"] },
+  { title:"Ethical Hacking Awareness &amp; Demonstration", issuer:"Jyoti Nivas College",
+    meta:"Workshop &amp; live demonstration", file:"ethical-hacking-awareness.pdf",
+    tags:["Ethical Hacking","Security Fundamentals"] },
+  { title:"Tech Tank Volunteer — CAPS Credit Course", issuer:"CHRIST (Deemed to be University)",
+    meta:"Technical volunteer leadership", file:"caps-tech-tank-volunteer.pdf",
+    tags:["Volunteer Leadership","Event Tech"] },
+  { title:"National Level Online Essay Writing Competition",
+    issuer:"Dept. of Commerce, Guru Nanak Khalsa College", meta:"National level participation",
+    file:"national-essay-writing.jpeg", tags:["Technical Writing","Analysis"] },
+];
+
+/* ── Skills ──────────────────────────────────────────────────────────────── */
+const SKILLS = [
+  { group:"Technical &amp; Software Development", items:[
+      { k:"Languages &amp; Core", v:["C#","Python","JavaScript","HTML5 / CSS3","Node.js"] },
+      { k:"Frameworks &amp; Web Architecture", v:["ASP.NET",".NET Framework 4.8","React","Windows Forms","E-Business Systems"] },
+      { k:"Tools &amp; IDEs", v:["Visual Studio 2022","Git &amp; GitHub","Digital Productivity Suite"] },
+      { k:"Systems &amp; Security", v:["RBAC","IP / MAC Device Security","OTP Authentication","Ethical Hacking Fundamentals"] },
+  ]},
+  { group:"Domain Expertise &amp; Innovation", items:[
+      { k:"Voice Integration &amp; AI", v:["Voice-Enabled Application Logic","AI Fraud Detection","Real-Time Analytics &amp; Reporting"] },
+      { k:"Financial &amp; Business Systems", v:["Financial ERP Systems","E-Business","Business Simulation Logic"] },
+      { k:"Digital Strategy &amp; Consulting", v:["Digital Marketing Strategy","Brand Positioning","Market Research &amp; Analysis"] },
+      { k:"Cross-Disciplinary Technology", v:["Nanotechnology Foundations","Genetic Engineering Foundations"] },
+  ]},
+  { group:"Soft Skills &amp; Professional Competencies", items:[
+      { k:"Leadership &amp; Teamwork", v:["Cross-Functional Collaboration","Hackathon Delivery Under Constraints","Technical Volunteer Leadership"] },
+      { k:"Analytical &amp; Communication", v:["Problem Solving Under Pressure","Strategic Communication","Analytical &amp; Technical Writing"] },
+  ]},
+];
+
+/* Core verified skill chips shown at the top of the Certificates panel. */
+const CORE_SKILLS = ["C#","Python","JavaScript","HTML5 / CSS3","Node.js","ASP.NET","React",
+                     "Windows Forms","Visual Studio 2022","Ethical Hacking","Digital Strategy"];
+
+/* Language → swatch colour for repo cards. */
+const LANG_COLOR = { Kotlin:"#a97bff", TypeScript:"#3178c6", JavaScript:"#f1c40f",
+                     Python:"#3572a5", Java:"#e76f00", CSS:"#563d7c", HTML:"#e34c26", "C#":"#68217a" };
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 1 — PIXEL ART ENGINE
+   Sprites are authored as character maps and rendered to canvases, then
+   exported as data-URLs so they can be dropped into <img> anywhere.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const Pixel = (() => {
+
+  const PALETTE = {
+    ".":null,
+    "H":"#241a13", "h":"#3b2a1d",              // hair, hair highlight
+    "S":"#cf9264", "s":"#ab7049",              // skin, skin shadow
+    "N":"#0e1013", "D":"#1b1e24", "l":"#8b939e",  // sunglasses: frame, lens, glint
+    "M":"#1c130d",                             // moustache
+    "W":"#eef2f7",                             // collar
+    "B":"#22456f", "b":"#16304f",              // navy shirt
+    "T":"#15171c",                             // tie
+    "P":"#262a33",                             // trousers
+    "E":"#0d0f13",                             // shoes
+  };
+
+  /* 16 × 26 character map — dark swept hair, gold-rimmed glasses,
+     moustache, navy shirt and dark tie. */
+  const BODY = [
+    "................",
+    ".....HHHHHH.....",
+    "...HHHHHHHHHH...",
+    "..HHHHHHHHHHHH..",
+    "..HhhHHHHHHhhH..",
+    "..HHSSSSSSSSHH..",
+    "..HSSSSSSSSSSH..",
+    "..NNNNNNNNNNNN..",
+    "..NDDlDNNDDlDN..",
+    "..HSSSSSSSSSSH..",
+    "...SSMMMMMMSS...",
+    "....SSSssSSS....",
+    "....SsSSSSsS....",
+    ".....SSSSSS.....",
+    "....WWWTTWWW....",
+    "..BBBBBTTBBBBB..",
+    ".BBBBBBTTBBBBBB.",
+    ".BBBBBBTTBBBBBB.",
+    ".SBBBBBTTBBBBBS.",
+    ".SBBBBBBBBBBBBS.",
+    "..BBBBBBBBBBBB..",
+    "...PPPPPPPPPP...",
+  ];
+
+  /* Rows 22-25: three leg poses drive the walk cycle. */
+  const LEGS = {
+    idle:  ["...PPPP..PPPP...","...PPPP..PPPP...","...EEEE..EEEE...","..EEEEE..EEEEE.."],
+    walkA: ["..PPPP....PPPP..","..PPPP.....PPP..","..EEEE.....EEE..",".EEEEE.....EEE.."],
+    walkB: ["..PPPP....PPPP..","..PPP.....PPPP..","..EEE.....EEEE..","..EEE.....EEEEE."],
+  };
+
+  const W = 16, H = 26, PAD = 1;   // 1px padding so the auto-outline fits
+
+  /** Render one sprite pose to a data-URL. */
+  function sprite(pose) {
+    const rows = BODY.concat(LEGS[pose]);
+    const cv = document.createElement("canvas");
+    cv.width = W + PAD * 2; cv.height = H + PAD * 2;
+    const ctx = cv.getContext("2d");
+
+    // 1. auto black outline: any empty cell touching a filled cell
+    ctx.fillStyle = "#0e1013";
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      if (at(rows, x, y) !== ".") continue;
+      if (at(rows,x-1,y)!=="." || at(rows,x+1,y)!=="." || at(rows,x,y-1)!=="." || at(rows,x,y+1)!==".")
+        ctx.fillRect(x + PAD, y + PAD, 1, 1);
+    }
+    // 2. the sprite itself
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const c = PALETTE[at(rows, x, y)];
+      if (!c) continue;
+      ctx.fillStyle = c;
+      ctx.fillRect(x + PAD, y + PAD, 1, 1);
+    }
+    return cv.toDataURL("image/png");
+  }
+  const at = (rows, x, y) => (rows[y] && rows[y][x]) || ".";
+
+  /* ── Folder icon: composed from integer-aligned rectangles so every edge
+        stays hard when the canvas is scaled up. Grid is 26 × 21. ───────────── */
+  function folder(canvas, o) {
+    const G = 26, Gh = 21, S = 6;              // logical grid + internal scale
+    canvas.width = G * S; canvas.height = Gh * S;
+    canvas.classList.add("pixel");
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+    ctx.setTransform(S, 0, 0, S, 0, 0);
+    ctx.clearRect(0, 0, G, Gh);
+
+    const K = "#0e1013";
+    const rect = (c, x, y, w, h) => { ctx.fillStyle = c; ctx.fillRect(x, y, w, h); };
+    const box  = (fill, x, y, w, h) => { rect(K, x, y, w, h); rect(fill, x + 1, y + 1, w - 2, h - 2); };
+
+    rect("rgba(17,18,20,.16)", 4, 19, 21, 2);        // hard drop shadow
+    box(o.tab, 2, 1, 11, 5);                          // folder tab
+    for (let i = 2; i >= 0; i--) box("#ffffff", 13 + i * 3, 4 + i, 8, 13 - i);  // paper stack
+    box(o.dark, 1, 4, 21, 14);                        // folder back
+    box(o.color, 1, 8, 20, 11);                       // folder front
+    rect(o.dark, 2, 9, 18, 1);                        // front top shading line
+    return canvas;
+  }
+
+  return { sprite, folder };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 2 — SOUND (tiny WebAudio blips, user-gesture driven)
+   ═══════════════════════════════════════════════════════════════════════════ */
+const Sound = (() => {
+  let ctx = null, on = true;
+  const ac = () => (ctx ||= new (window.AudioContext || window.webkitAudioContext)());
+  function blip(freq = 440, dur = 0.07, type = "square", gain = 0.045) {
+    if (!on) return;
+    try {
+      const a = ac(); if (a.state === "suspended") a.resume();
+      const o = a.createOscillator(), g = a.createGain();
+      o.type = type; o.frequency.value = freq;
+      g.gain.setValueAtTime(gain, a.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + dur);
+      o.connect(g).connect(a.destination); o.start(); o.stop(a.currentTime + dur);
+    } catch (_) {}
+  }
+  return {
+    click: () => blip(660, .05),
+    open:  () => { blip(523, .06); setTimeout(() => blip(784, .09), 60); },
+    close: () => { blip(392, .06); setTimeout(() => blip(262, .09), 55); },
+    step:  () => blip(180, .025, "square", .018),
+    toggle(){ on = !on; return on; },
+    get on(){ return on; },
+  };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 3 — SECTION CONTENT BUILDERS
+   ═══════════════════════════════════════════════════════════════════════════ */
+const esc = s => String(s).replace(/[<>&"]/g, c => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;", '"':"&quot;" }[c]));
+const badges = arr => arr.map(t => `<span class="badge">${t}</span>`).join("");
+
+const ICONS = {
+  github:`<svg viewBox="0 0 24 24" fill="#111214"><path d="M12 .5C5.73.5.9 5.33.9 11.6c0 4.9 3.17 9.05 7.57 10.52.55.1.75-.24.75-.53v-2.07c-3.08.67-3.73-1.3-3.73-1.3-.5-1.29-1.23-1.63-1.23-1.63-1.01-.69.08-.67.08-.67 1.11.08 1.7 1.15 1.7 1.15.99 1.7 2.6 1.21 3.24.93.1-.72.39-1.21.7-1.49-2.46-.28-5.05-1.23-5.05-5.48 0-1.21.43-2.2 1.14-2.98-.11-.28-.5-1.41.11-2.94 0 0 .93-.3 3.05 1.14.88-.25 1.83-.37 2.77-.37.94 0 1.89.13 2.78.37 2.11-1.44 3.04-1.14 3.04-1.14.61 1.53.22 2.66.11 2.94.71.78 1.14 1.77 1.14 2.98 0 4.26-2.6 5.19-5.07 5.47.4.35.76 1.03.76 2.08v3.08c0 .3.2.64.76.53 4.4-1.47 7.56-5.62 7.56-10.52C23.1 5.33 18.27.5 12 .5z"/></svg>`,
+  linkedin:`<svg viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>`,
+  mail:`<svg viewBox="0 0 24 24" fill="#d63c2f"><path d="M1.5 5.25A2.25 2.25 0 0 1 3.75 3h16.5a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 20.25 21H3.75a2.25 2.25 0 0 1-2.25-2.25V5.25zm2.4-.75L12 11.02 20.1 4.5H3.9zM21 6.6l-8.4 6.77a1 1 0 0 1-1.26 0L3 6.6v12.15c0 .41.34.75.75.75h16.5c.41 0 .75-.34.75-.75V6.6z"/></svg>`,
+};
+
+const Content = {
+
+  /* ── ABOUT ─────────────────────────────────────────────────────────────── */
+  about() {
+    return `
+    <div class="panel-inner">
+      <div class="flex flex-col md:flex-row md:items-start gap-7 md:gap-10">
+        <img class="pixel rcard fade-up" src="${AVATAR_SRC}" width="132" height="132"
+             alt="Pixel-art portrait of Shaurya Garg" style="flex:none;padding:6px;background:#fff" />
+        <div class="fade-up" style="animation-delay:.06s">
+          <p class="lede">Hi, my name is Shaurya Garg.</p>
+          <p class="lede" style="margin-top:.55em">I build full-stack systems — and the strategy around them.</p>
+        </div>
+      </div>
+
+      <div class="copy mt-9 space-y-5 fade-up" style="animation-delay:.12s;max-width:74ch">
+        <p>I&rsquo;m a <b>Bachelor of Computer Applications</b> student at <b>CHRIST (Deemed to be University), Bengaluru</b>
+           (2024&ndash;2027), working as a <b>Full-Stack Developer</b> and <b>Digital Strategy Specialist</b>.</p>
+        <p>My work sits on both sides of a product. On the engineering side that means C# and ASP.NET on
+           .NET Framework 4.8, Windows Forms desktop apps, React and Node.js on the web, and Python for
+           data and analytics work. On the strategy side it means digital marketing, brand positioning
+           and market research — the JuniorMBA track I completed with <b>Puma</b> as the client brand.</p>
+        <p>The thread between them is systems that people actually trust: role-based access control,
+           OTP authentication bound to device IP and MAC, AI-assisted fraud detection, and dashboards
+           that report in real time. That&rsquo;s exactly what <b>CivicLedgerX</b> — my DotXathon 2026 build —
+           was designed around.</p>
+        <p>Along the way I&rsquo;ve consulted on brand strategy for <b>Puma</b> through Clever Harvey&rsquo;s
+           JuniorMBA programme and completed a research internship with <b>Corizo Edutech</b> in
+           nanotechnology and genetic engineering, alongside its IIT Bombay-affiliated technical training.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 mt-8 fade-up" style="animation-delay:.15s">
+        <span class="badge badge-solid">● OPEN TO WORK</span>
+        <span class="badge">BENGALURU, KARNATAKA</span>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 fade-up" style="animation-delay:.18s">
+        <div class="stat"><b>2024–27</b><span>BCA</span></div>
+        <div class="stat"><b>${EXPERIENCE.length}</b><span>INTERNSHIPS</span></div>
+        <div class="stat"><b>9+</b><span>PROJECTS</span></div>
+        <div class="stat"><b>${CERTS.length}</b><span>CERTIFICATES</span></div>
+      </div>
+
+      <div class="mt-11 fade-up" style="animation-delay:.24s">
+        <p class="eyebrow">CURRENTLY</p>
+        <ul class="copy mt-4 space-y-3" style="max-width:70ch">
+          <li>▸ Extending <b>CivicLedgerX</b> beyond the hackathon build.</li>
+          <li>▸ Shipping <b>VitalCore AI</b>, an Android biometric analytics engine in Kotlin.</li>
+          <li>▸ Modelling race outcomes in <b>F1-2026-Intelligence</b>.</li>
+          <li>▸ Volunteering with <b>Tech Tank</b> under the CAPS credit course at CHRIST.</li>
+        </ul>
+      </div>
+
+      <div class="mt-11 flex flex-wrap gap-3 fade-up" style="animation-delay:.3s">
+        <button class="lbtn" data-goto="work" type="button">EXPERIENCE →</button>
+        <button class="lbtn" data-goto="projects" type="button">SEE ALL PROJECTS →</button>
+        <button class="lbtn" data-goto="certs" type="button">CERTIFICATES &amp; SKILLS →</button>
+        <button class="lbtn" data-goto="contact" type="button">GET IN TOUCH →</button>
+      </div>
+    </div>`;
+  },
+
+  /* ── EXPERIENCE ────────────────────────────────────────────────────────── */
+  work() {
+    return `
+    <div class="panel-inner">
+
+      <p class="eyebrow fade-up">WORK EXPERIENCE &amp; INTERNSHIPS</p>
+
+      <div class="space-y-7 mt-6">
+        ${EXPERIENCE.map((e, i) => `
+          <article class="rcard p-6 md:p-8 fade-up" style="animation-delay:${.06 + i * .08}s">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div style="min-width:0">
+                <h3 style="font-size:clamp(17px,2.1vw,22px);font-weight:700;line-height:1.35">${e.role}</h3>
+                <p class="font-pixel mt-4" style="font-size:9.5px;letter-spacing:.1em;line-height:1.8">${e.org}</p>
+              </div>
+              <span class="badge badge-solid">INTERNSHIP</span>
+            </div>
+            <p class="mt-4" style="font-size:13.5px;color:#4b4d52">${e.meta}</p>
+            <ul class="copy mt-5 space-y-3" style="font-size:15px;max-width:74ch">
+              ${e.points.map(p => `<li>▸ ${p}</li>`).join("")}
+            </ul>
+            <div class="flex flex-wrap gap-2 mt-6">${badges(e.tags)}</div>
+          </article>`).join("")}
+      </div>
+
+      <h3 class="font-pixel mt-14 mb-6" style="font-size:clamp(10px,1.8vw,14px);letter-spacing:.14em">ACHIEVEMENTS &amp; AWARDS</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        ${ACHIEVEMENTS.map((a, i) => `
+          <article class="rcard p-6 flex gap-5 fade-up" style="animation-delay:${Math.min(i * .06, .3)}s">
+            <div class="seal" style="background:var(--gold)" aria-hidden="true">★</div>
+            <p class="copy" style="font-size:14.5px;min-width:0">${a}</p>
+          </article>`).join("")}
+      </div>
+
+      <h3 class="font-pixel mt-14 mb-6" style="font-size:clamp(10px,1.8vw,14px);letter-spacing:.14em">CO-CURRICULAR &amp; LEADERSHIP</h3>
+      <article class="rcard p-6 md:p-8 fade-up">
+        <h4 style="font-size:17px;font-weight:700">Representative — National Level Essay Writing Competition</h4>
+        <p class="font-pixel mt-4" style="font-size:9.5px;letter-spacing:.1em;line-height:1.8">CHRIST (Deemed to be University), Bengaluru</p>
+        <p class="copy mt-5" style="font-size:15px;max-width:74ch">
+          Represented CHRIST University at a National Level Online Essay Writing Competition hosted by the
+          Department of Commerce, Guru Nanak Khalsa College — showcasing communication and analytical writing skills.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">${badges(["Strategic Communication","Analytical Writing","Representation"])}</div>
+      </article>
+
+      <div class="mt-11 flex flex-wrap gap-3 fade-up">
+        <button class="lbtn" data-goto="projects" type="button">SEE THE PROJECTS →</button>
+        <button class="lbtn" data-goto="certs" type="button">CERTIFICATES &amp; SKILLS →</button>
+      </div>
+    </div>`;
+  },
+
+  /* ── PROJECTS ──────────────────────────────────────────────────────────── */
+  projects() {
+    const f = FEATURED;
+    return `
+    <div class="panel-inner">
+
+      <!-- Featured -->
+      <article class="rcard featured p-6 md:p-9 fade-up">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="ribbon"><span class="star">★</span> FEATURED — HACKATHON BUILD</span>
+          <span class="badge badge-solid">DOTXATHON 2026</span>
+        </div>
+        <h2 class="font-pixel mt-6" style="font-size:clamp(14px,2.6vw,24px);letter-spacing:.06em;line-height:1.45">${f.name}</h2>
+        <p class="mt-4 font-semibold" style="font-size:clamp(15px,1.8vw,20px)">${f.tagline}</p>
+        <p class="eyebrow mt-3" style="line-height:1.7">${f.event}</p>
+        <p class="mt-3" style="font-size:13.5px;color:#4b4d52">${f.team}</p>
+        <p class="copy mt-6" style="max-width:74ch">${f.desc}</p>
+        <ul class="copy mt-6 grid md:grid-cols-2 gap-x-8 gap-y-3" style="font-size:15px">
+          ${f.bullets.map(b => `<li>▸ ${b}</li>`).join("")}
+        </ul>
+        <div class="flex flex-wrap gap-2 mt-7">${badges(f.stack)}</div>
+        <p class="mt-6" style="font-size:13px;color:#4b4d52">${f.note}</p>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a class="lbtn" href="${f.repo}" target="_blank" rel="noopener">${f.repoLabel} ↗</a>
+          <span class="lbtn" aria-disabled="true">LIVE DEMO — N/A</span>
+        </div>
+      </article>
+
+      <!-- Repo grid -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mt-14 mb-6">
+        <h3 class="font-pixel" style="font-size:clamp(10px,1.8vw,14px);letter-spacing:.14em">ALL REPOSITORIES</h3>
+        <span id="ghStatus" class="badge">SYNCING WITH GITHUB…</span>
+      </div>
+      <div id="repoGrid" class="grid md:grid-cols-2 gap-6"></div>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a class="lbtn" href="${CONFIG.github}" target="_blank" rel="noopener">VIEW GITHUB PROFILE ↗</a>
+      </div>
+    </div>`;
+  },
+
+  repoCard(r, i) {
+    const dot = LANG_COLOR[r.lang] || "#111214";
+    const demo = r.demo
+      ? `<a class="lbtn" href="${r.demo}" target="_blank" rel="noopener">${r.demoLabel || "LIVE DEMO"} ↗</a>`
+      : `<span class="lbtn" aria-disabled="true">NO LIVE DEMO</span>`;
+    return `
+      <article class="rcard p-6 flex flex-col fade-up" style="animation-delay:${Math.min(i * .05, .4)}s">
+        <div class="flex items-start justify-between gap-4">
+          <h4 class="font-pixel" style="font-size:11px;letter-spacing:.05em;line-height:1.6;word-break:break-word">${esc(r.name)}</h4>
+          ${r.stars ? `<span class="badge" title="Stars">★ ${r.stars}</span>` : ""}
+        </div>
+        <p class="copy mt-4" style="font-size:14.5px;flex:1">${r.desc}</p>
+        <div class="flex flex-wrap gap-2 mt-5">${badges(r.stack)}</div>
+        <div class="flex items-center gap-2 mt-5" style="font-size:12px;color:#4b4d52">
+          <i class="langdot" style="background:${dot}"></i>
+          <span>${esc(r.lang || "Mixed")}</span>
+          ${r.updated ? `<span>· updated ${r.updated}</span>` : ""}
+        </div>
+        <div class="flex flex-wrap gap-3 mt-5">
+          <a class="lbtn" href="${r.repo}" target="_blank" rel="noopener">GITHUB REPO ↗</a>
+          ${demo}
+        </div>
+      </article>`;
+  },
+
+  /* ── CERTIFICATES + SKILLS ─────────────────────────────────────────────── */
+  certs() {
+    return `
+    <div class="panel-inner">
+
+      <p class="eyebrow fade-up">VERIFIED SKILLS</p>
+      <div class="flex flex-wrap gap-2 mt-5 fade-up" style="animation-delay:.05s">
+        ${CORE_SKILLS.map(s => `<span class="badge">${s}</span>`).join("")}
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6 mt-10">
+        ${SKILLS.map((g, i) => `
+          <section class="rcard p-6 fade-up" style="animation-delay:${.08 + i * .06}s">
+            <h3 class="font-pixel" style="font-size:9.5px;letter-spacing:.1em;line-height:1.7">${g.group}</h3>
+            <div class="mt-5 space-y-5">
+              ${g.items.map(it => `
+                <div>
+                  <p style="font-size:12.5px;font-weight:700;color:#4b4d52">${it.k}</p>
+                  <div class="flex flex-wrap gap-2 mt-2.5">${badges(it.v)}</div>
+                </div>`).join("")}
+            </div>
+          </section>`).join("")}
+      </div>
+
+      <h3 class="font-pixel mt-14 mb-6" style="font-size:clamp(10px,1.8vw,14px);letter-spacing:.14em">CERTIFICATES — ${CERTS.length} VERIFIED</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        ${CERTS.map((c, i) => `
+          <article class="rcard p-6 flex gap-5 fade-up" style="animation-delay:${Math.min(i * .05, .35)}s">
+            <div class="seal" aria-hidden="true">✓</div>
+            <div style="min-width:0;flex:1">
+              <h4 style="font-size:16.5px;font-weight:700;line-height:1.4">${c.title}</h4>
+              <p class="mt-2.5" style="font-size:14px;font-weight:600;color:#1c1e22">${c.issuer}</p>
+              <p class="mt-1.5" style="font-size:13px;color:#4b4d52">${c.meta}</p>
+              <div class="flex flex-wrap gap-2 mt-4">${badges(c.tags)}</div>
+              <div class="mt-5">
+                ${c.file
+                  ? `<a class="lbtn" href="${CONFIG.certDir}${encodeURIComponent(c.file)}" target="_blank" rel="noopener">VIEW CERTIFICATE ↗</a>`
+                  : `<span class="lbtn" aria-disabled="true">ON REQUEST</span>`}
+              </div>
+            </div>
+          </article>`).join("")}
+      </div>
+
+      <p class="mt-8" style="font-size:12.5px;color:#4b4d52;max-width:70ch">
+        Certificate files load from the <code>${CONFIG.certDir}</code> folder next to this page.
+        Keep that folder alongside <code>index.html</code> when you deploy, or edit
+        <code>CONFIG.certDir</code> to point at wherever you host them.
+      </p>
+    </div>`;
+  },
+
+  /* ── CONTACT ───────────────────────────────────────────────────────────── */
+  contact() {
+    const links = [
+      { k:"github",   href:CONFIG.github,   label:"GitHub",   color:"#111214" },
+      { k:"linkedin", href:CONFIG.linkedin, label:"LinkedIn", color:"#0a66c2" },
+      { k:"mail",     href:"mailto:" + CONFIG.email, label:"Email", color:"#d63c2f" },
+    ];
+    return `
+    <div class="panel-inner h-full flex flex-col items-center justify-center text-center" style="min-height:58vh">
+      <div class="handle-pill fade-up">
+        <img class="pixel" src="${AVATAR_SRC}" alt="Pixel portrait of Shaurya Garg" />
+        <span style="font-size:17px;font-weight:600">@Shauurrya</span>
+      </div>
+
+      <p class="copy mt-8 fade-up" style="animation-delay:.06s;max-width:52ch">
+        Open to internships, freelance builds and collaboration on full-stack or
+        digital-strategy work. The fastest way to reach me is email.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-5 md:gap-8 mt-12 mb-14 fade-up" style="animation-delay:.12s">
+        ${links.map(l => `
+          <a class="social" href="${l.href}" target="_blank" rel="noopener"
+             aria-label="${l.label}" data-brand="${l.color}">
+            ${ICONS[l.k]}
+            <span class="tip" style="background:${l.color}">${l.label}</span>
+          </a>`).join("")}
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3 fade-up" style="animation-delay:.18s">
+        <a class="lbtn" href="mailto:${CONFIG.email}">${CONFIG.email.toUpperCase()}</a>
+        <button class="lbtn" id="copyMail" type="button">COPY EMAIL</button>
+      </div>
+
+      <p class="font-pixel mt-14" style="font-size:8px;letter-spacing:.16em;color:#4b4d52;line-height:2">
+        SHAURYA GARG · BCA @ CHRIST (DEEMED TO BE UNIVERSITY)<br />BENGALURU, INDIA
+      </p>
+    </div>`;
+  },
+};
+
+const SECTIONS = {
+  about:    { title:"ABOUT ME",                    build:Content.about },
+  work:     { title:"EXPERIENCE",                  build:Content.work },
+  projects: { title:"ALL PROJECTS",                build:Content.projects },
+  certs:    { title:"CERTIFICATES &amp; SKILLS",   build:Content.certs },
+  contact:  { title:"CONTACT",                     build:Content.contact },
+};
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 4 — GITHUB FEED (live fetch, merged over the curated copy)
+   ═══════════════════════════════════════════════════════════════════════════ */
+const GitHubFeed = (() => {
+  let cache = null;
+
+  const fmtDate = iso => {
+    try { return new Date(iso).toLocaleDateString(undefined, { month:"short", year:"numeric" }); }
+    catch (_) { return ""; }
+  };
+
+  function render(list) {
+    const grid = document.getElementById("repoGrid");
+    if (!grid) return;
+    grid.innerHTML = list.map((r, i) => Content.repoCard(r, i)).join("");
+  }
+
+  function setStatus(text, live) {
+    const el = document.getElementById("ghStatus");
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle("badge-solid", !!live);
+  }
+
+  async function mount() {
+    render(REPOS);                                   // curated data paints instantly
+    if (cache) { render(cache); setStatus(`LIVE · ${cache.length} REPOS`, true); return; }
+
+    try {
+      const res = await fetch(
+        `https://api.github.com/users/${CONFIG.ghUser}/repos?per_page=100&sort=updated`,
+        { headers: { Accept: "application/vnd.github+json" } }
+      );
+      if (!res.ok) throw new Error(res.status);
+      const raw = await res.json();
+
+      const byName = new Map(REPOS.map(r => [r.name.toLowerCase(), { ...r, curated: true }]));
+      raw.filter(r => !r.fork).forEach(r => {
+        const key = r.name.toLowerCase();
+        const cur = byName.get(key) || {
+          name: r.name,
+          desc: esc(r.description || "Public repository on GitHub."),
+          stack: [r.language || "Code"],
+          repo: r.html_url,
+          demo: null,
+        };
+        cur.lang    = r.language || cur.lang;
+        cur.repo    = r.html_url;
+        cur.stars   = r.stargazers_count || 0;
+        cur.updated = fmtDate(r.updated_at);
+        // hand-written copy stays; GitHub only fills the gaps
+        if (r.description && !cur.curated) cur.desc = esc(r.description);
+        if (r.homepage && !cur.demo) cur.demo = r.homepage;
+        byName.set(key, cur);
+      });
+
+      const order = new Map(REPOS.map((r, i) => [r.name.toLowerCase(), i]));
+      cache = [...byName.values()].sort(
+        (a, b) => (order.get(a.name.toLowerCase()) ?? 99) - (order.get(b.name.toLowerCase()) ?? 99)
+      );
+      render(cache);
+      setStatus(`LIVE · ${cache.length} REPOS`, true);
+    } catch (_) {
+      setStatus("OFFLINE — CACHED LIST");            // rate-limited or no network
+    }
+  }
+  return { mount };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 5 — PIXEL WIPE TRANSITION
+   ═══════════════════════════════════════════════════════════════════════════ */
+const Wipe = (() => {
+  const el = document.getElementById("wipe");
+  let cols = 0, rows = 0;
+
+  function build() {
+    const w = el.clientWidth || window.innerWidth;
+    cols = w < 640 ? 6 : 12;
+    rows = w < 640 ? 8 : 7;
+    el.style.gridTemplateColumns = `repeat(${cols},1fr)`;
+    el.style.gridTemplateRows    = `repeat(${rows},1fr)`;
+    el.innerHTML = Array.from({ length: cols * rows }, (_, i) => {
+      const c = i % cols, r = Math.floor(i / cols);
+      return `<i style="transition-delay:${(c + r) * 16}ms"></i>`;
+    }).join("");
+  }
+
+  /** Cover the screen, run `mid`, then uncover.
+   *  Overlapping calls queue instead of fighting over the same classes —
+   *  otherwise a fast double-navigation can strand the wipe on screen. */
+  let busy = false;
+  const pending = [];
+
+  function run(mid) {
+    if (!el.children.length) build();
+    if (busy) { pending.push(mid); return; }
+    busy = true;
+
+    const span = (cols + rows) * 16 + 220;
+    el.classList.add("on");
+    requestAnimationFrame(() => el.classList.add("cover"));
+
+    setTimeout(() => {
+      try { mid && mid(); }
+      finally {
+        el.classList.remove("cover");
+        setTimeout(() => {
+          el.classList.remove("on");
+          busy = false;
+          const next = pending.shift();
+          if (next) run(next);
+        }, span);
+      }
+    }, span);
+  }
+  return { run, build };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 6 — SECTION ROUTER
+   ═══════════════════════════════════════════════════════════════════════════ */
+const Router = (() => {
+  const overlay = document.getElementById("overlay");
+  let current = null, lastFocus = null;
+
+  function panelFor(id) {
+    let p = overlay.querySelector(`.panel[data-id="${id}"]`);
+    if (p) return p;
+    const s = SECTIONS[id];
+    p = document.createElement("section");
+    p.className = "panel";
+    p.dataset.id = id;
+    p.innerHTML = `
+      <div class="panel-head">
+        <h2 class="font-pixel panel-title">${s.title}</h2>
+        <div class="flex items-center gap-2.5">
+          <button class="btn-x" type="button" data-nav="menu">navigate</button>
+          <button class="btn-x" type="button" data-nav="close">× CLOSE</button>
+        </div>
+      </div>
+      <div class="panel-body scroll-retro">${s.build()}</div>`;
+    overlay.appendChild(p);
+    return p;
+  }
+
+  function open(id, silent) {
+    if (!SECTIONS[id] || current === id) return;
+    lastFocus = document.activeElement;
+    !silent && Sound.open();
+    Wipe.run(() => {
+      overlay.querySelectorAll(".panel.active").forEach(p => p.classList.remove("active"));
+      const p = panelFor(id);
+      p.classList.add("active");
+      p.querySelector(".panel-body").scrollTop = 0;
+      overlay.classList.add("on");
+      current = id;
+      location.hash = id;
+      if (id === "projects") GitHubFeed.mount();
+      p.querySelector(".btn-x[data-nav='close']")?.focus({ preventScroll:true });
+    });
+  }
+
+  function close(silent) {
+    if (!current) return;
+    !silent && Sound.close();
+    Wipe.run(() => {
+      overlay.querySelectorAll(".panel.active").forEach(p => p.classList.remove("active"));
+      overlay.classList.remove("on");
+      current = null;
+      history.replaceState(null, "", location.pathname + location.search);
+      Player.nudgeOff();
+      lastFocus?.focus?.({ preventScroll:true });
+    });
+  }
+
+  const isOpen = () => !!current;
+  return { open, close, isOpen };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 7 — DESKTOP: folders + the walking player
+   ═══════════════════════════════════════════════════════════════════════════ */
+const Player = (() => {
+  const desk   = document.getElementById("desk");
+  const el     = document.getElementById("player");
+  const hint   = document.getElementById("playerHint");
+  const frames = {};
+  const keys   = new Set();
+
+  let x = 0, y = 0, w = 60, h = 96;
+  let facing = 1, animT = 0, stepT = 0, frame = "idle", moving = false;
+  let nearFolder = null, dwell = 0, cooled = 0, raf = null, last = 0;
+
+  const SPEED = 300;          // px / second
+  const DWELL_MS = 620;       // how long you must stand on a folder
+
+  function buildFrames() {
+    frames.idle  = Pixel.sprite("idle");
+    frames.walkA = Pixel.sprite("walkA");
+    frames.walkB = Pixel.sprite("walkB");
+    el.src = frames.idle;
+    document.getElementById("bootSprite").src = frames.idle;
+    document.getElementById("menuAvatar").src = AVATAR_SRC;
+  }
+
+  function measure() {
+    const r = el.getBoundingClientRect();
+    w = r.width || 60; h = r.height || 96;
+  }
+
+  let deskSize = { w:0, h:0 };
+
+  /* Spawn centred and clear of the folder row, whatever height it wraps to,
+     so the player never lands on a folder and auto-opens it. */
+  function center() {
+    const r = desk.getBoundingClientRect();
+    const row = document.getElementById("folders").getBoundingClientRect();
+    const ideal = (row.top - r.top) - h - 34;
+    x = r.width / 2 - w / 2;
+    y = Math.max(8, Math.min(ideal, r.height * 0.42));
+    deskSize = { w:r.width, h:r.height };
+    cooled = 800;                       // never open a folder on arrival
+    place();
+  }
+
+  /* keep the player where it *proportionally* was when the window changes */
+  function onResize() {
+    const r = desk.getBoundingClientRect();
+    if (deskSize.w && deskSize.h) {
+      x *= r.width  / deskSize.w;
+      y *= r.height / deskSize.h;
+    }
+    deskSize = { w:r.width, h:r.height };
+    measure(); place();
+
+    /* The folder row is bottom-anchored and re-wraps, so proportional scaling
+       can drop the player straight onto it. A reflow must never open a section. */
+    if (overlap()) {
+      const row = document.getElementById("folders").getBoundingClientRect();
+      y = Math.max(8, (row.top - r.top) - h - 24);
+      place();
+    }
+    cooled = Math.max(cooled, 700);
+    Wipe.build();
+  }
+
+  function place() {
+    const r = desk.getBoundingClientRect();
+    x = Math.max(4, Math.min(x, r.width  - w - 4));
+    y = Math.max(4, Math.min(y, r.height - h - 12));
+    el.style.transform = `translate(${x}px, ${y}px) scaleX(${facing})`;
+    hint.style.left = (x + w / 2) + "px";
+    hint.style.top  = (y - 6) + "px";
+  }
+
+  function folderEls() { return [...document.querySelectorAll(".folder")]; }
+
+  /* You "enter" a folder by standing on it: test where the sprite's feet are
+     against the folder box grown by a forgiving margin. */
+  function overlap() {
+    const dr = desk.getBoundingClientRect();
+    const fx = x + w / 2, fy = y + h * .88;
+    const M = 18;
+    for (const f of folderEls()) {
+      const fr = f.getBoundingClientRect();
+      const x1 = fr.left - dr.left - M, x2 = x1 + fr.width  + M * 2;
+      const y1 = fr.top  - dr.top  - M, y2 = y1 + fr.height + M * 2;
+      if (fx > x1 && fx < x2 && fy > y1 && fy < y2) return f;
+    }
+    return null;
+  }
+
+  function tick(ts) {
+    raf = requestAnimationFrame(tick);
+    const dt = Math.min((ts - (last || ts)) / 1000, .05); last = ts;
+    if (Router.isOpen()) { moving = false; setFrame("idle"); return; }
+
+    let dx = 0, dy = 0;
+    if (keys.has("left"))  dx -= 1;
+    if (keys.has("right")) dx += 1;
+    if (keys.has("up"))    dy -= 1;
+    if (keys.has("down"))  dy += 1;
+
+    moving = !!(dx || dy);
+    if (moving) {
+      const len = Math.hypot(dx, dy) || 1;
+      x += (dx / len) * SPEED * dt;
+      y += (dy / len) * SPEED * dt;
+      if (dx) facing = dx > 0 ? 1 : -1;
+      animT += dt * 1000;
+      if (animT > 130) { animT = 0; setFrame(frame === "walkA" ? "walkB" : "walkA"); }
+      stepT += dt * 1000;
+      if (stepT > 260) { stepT = 0; Sound.step(); }
+      place();
+    } else {
+      setFrame("idle");
+    }
+
+    /* proximity + dwell-to-open */
+    const hit = overlap();
+    if (hit !== nearFolder) {
+      nearFolder?.classList.remove("near");
+      nearFolder = hit; dwell = 0;
+      if (hit) {
+        hit.classList.add("near");
+        hint.textContent = "ENTER TO OPEN";
+        hint.style.opacity = "1";
+        Sound.click();
+      } else {
+        hint.style.opacity = "0";
+      }
+    }
+    if (nearFolder) {
+      if (cooled > 0) cooled -= dt * 1000;
+      else {
+        dwell += dt * 1000;
+        const bar = nearFolder.querySelector(".charge i");
+        if (bar) bar.style.width = Math.min(100, (dwell / DWELL_MS) * 100) + "%";
+        if (dwell >= DWELL_MS) { dwell = 0; if (bar) bar.style.width = "0%"; Router.open(nearFolder.dataset.id); }
+      }
+    }
+  }
+
+  function setFrame(f) { if (frame !== f) { frame = f; el.src = frames[f]; } }
+
+  /* after closing a panel, don't instantly re-trigger the folder you're on */
+  function nudgeOff() {
+    cooled = 900; dwell = 0;
+    const bar = nearFolder?.querySelector(".charge i");
+    if (bar) bar.style.width = "0%";
+  }
+
+  const KEYMAP = { ArrowLeft:"left", a:"left", A:"left", ArrowRight:"right", d:"right", D:"right",
+                   ArrowUp:"up", w:"up", W:"up", ArrowDown:"down", s:"down", S:"down" };
+
+  function bindKeys() {
+    addEventListener("keydown", e => {
+      const k = KEYMAP[e.key];
+      if (k && !Router.isOpen()) { keys.add(k); e.preventDefault(); }
+      if (e.key === "Enter" && nearFolder && !Router.isOpen()) Router.open(nearFolder.dataset.id);
+      if (e.key === "Escape") { Nav.close(); Router.close(); }
+    }, { passive:false });
+    addEventListener("keyup", e => { const k = KEYMAP[e.key]; if (k) keys.delete(k); });
+    addEventListener("blur", () => keys.clear());
+  }
+
+  function bindDpad() {
+    document.querySelectorAll("#dpad button").forEach(b => {
+      const dir = b.dataset.dir;
+      const on  = e => { e.preventDefault(); keys.add(dir); };
+      const off = e => { e.preventDefault(); keys.delete(dir); };
+      b.addEventListener("pointerdown", on);
+      b.addEventListener("pointerup", off);
+      b.addEventListener("pointercancel", off);
+      b.addEventListener("pointerleave", off);
+    });
+  }
+
+  function mountFolders() {
+    const row = document.getElementById("folders");
+    row.innerHTML = "";
+    FOLDERS.forEach(f => {
+      const b = document.createElement("button");
+      b.className = "folder";
+      b.type = "button";
+      b.dataset.id = f.id;
+      b.setAttribute("aria-label", `Open ${f.label.replace(/&amp;/g, "&")}`);
+      const cv = document.createElement("canvas");
+      b.innerHTML = `<div class="charge"><i></i></div>`;
+      b.appendChild(cv);
+      const lab = document.createElement("span");
+      lab.className = "font-pixel folder-label";
+      lab.style.color = f.color;
+      lab.textContent = f.label;
+      b.appendChild(lab);
+      Pixel.folder(cv, f);
+      b.addEventListener("click", () => Router.open(f.id));
+      row.appendChild(b);
+    });
+  }
+
+  function start() {
+    buildFrames();
+    mountFolders();
+    requestAnimationFrame(() => { measure(); center(); });
+    bindKeys(); bindDpad();
+    addEventListener("resize", onResize);
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  return { start, nudgeOff, center };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 8 — NAVIGATE MENU
+   ═══════════════════════════════════════════════════════════════════════════ */
+const Nav = (() => {
+  const btn  = document.getElementById("navBtn");
+  const menu = document.getElementById("menu");
+  const scrim= document.getElementById("scrim");
+  const list = document.getElementById("menuList");
+
+  const ITEMS = [
+    { id:"home",     label:"DESKTOP" },
+    { id:"about",    label:"ABOUT ME" },
+    { id:"work",     label:"EXPERIENCE" },
+    { id:"projects", label:"ALL PROJECTS" },
+    { id:"certs",    label:"CERTIFICATES" },
+    { id:"contact",  label:"CONTACT" },
+    { id:"gh",       label:"GITHUB ↗",   href:CONFIG.github },
+    { id:"li",       label:"LINKEDIN ↗", href:CONFIG.linkedin },
+  ];
+
+  function build() {
+    list.innerHTML = ITEMS.map(i =>
+      i.href
+        ? `<a class="menu-item" href="${i.href}" target="_blank" rel="noopener"><i class="menu-dot"></i>${i.label}</a>`
+        : `<button class="menu-item" type="button" data-go="${i.id}"><i class="menu-dot"></i>${i.label}</button>`
+    ).join("");
+  }
+
+  function open()  { menu.classList.add("open"); scrim.classList.add("on"); btn.setAttribute("aria-expanded","true");  Sound.click(); }
+  function close() { menu.classList.remove("open"); scrim.classList.remove("on"); btn.setAttribute("aria-expanded","false"); }
+  const toggle = () => menu.classList.contains("open") ? close() : open();
+
+  function start() {
+    build();
+    btn.addEventListener("click", toggle);
+    scrim.addEventListener("click", close);
+    list.addEventListener("click", e => {
+      const b = e.target.closest("[data-go]"); if (!b) return;
+      close();
+      const id = b.dataset.go;
+      id === "home" ? Router.close() : Router.open(id);
+    });
+    /* per-panel navigate + close buttons, and in-copy jump buttons */
+    document.getElementById("overlay").addEventListener("click", e => {
+      const nav = e.target.closest("[data-nav]");
+      if (nav) { nav.dataset.nav === "menu" ? toggle() : Router.close(); return; }
+      const go = e.target.closest("[data-goto]");
+      if (go) { Router.close(true); Router.open(go.dataset.goto); return; }   // Wipe queues these
+      const cp = e.target.closest("#copyMail");
+      if (cp) {
+        navigator.clipboard?.writeText(CONFIG.email);
+        cp.textContent = "COPIED ✓"; Sound.open();
+        setTimeout(() => (cp.textContent = "COPY EMAIL"), 1600);
+      }
+    });
+    /* social circles fill with their brand colour on hover */
+    document.getElementById("overlay").addEventListener("mouseover", e => {
+      const s = e.target.closest(".social"); if (s) s.style.background = s.dataset.brand;
+    });
+    document.getElementById("overlay").addEventListener("mouseout", e => {
+      const s = e.target.closest(".social"); if (s) s.style.background = "#fff";
+    });
+  }
+  return { start, open, close, toggle };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODULE 9 — BOOT SEQUENCE
+   ═══════════════════════════════════════════════════════════════════════════ */
+const Boot = (() => {
+  const screen = document.getElementById("boot");
+  const bar    = document.getElementById("bootBar");
+  const pct    = document.getElementById("bootPct");
+  let p = 0, timer = null, finished = false;
+
+  function finish() {
+    if (finished) return;
+    finished = true;
+    clearInterval(timer);
+    bar.style.width = "100%"; pct.textContent = "100%";
+    setTimeout(() => {
+      screen.classList.add("done");
+      Sound.open();
+      const hash = location.hash.replace("#", "");
+      if (SECTIONS[hash]) setTimeout(() => Router.open(hash, true), 260);
+    }, 260);
+  }
+
+  function start() {
+    timer = setInterval(() => {
+      p = Math.min(100, p + Math.random() * 9 + 3);
+      bar.style.width = p + "%";
+      pct.textContent = Math.floor(p) + "%";
+      if (p >= 100) finish();
+    }, 120);
+    screen.addEventListener("click", finish);
+    addEventListener("keydown", function once(e) {
+      if (e.key === " " || e.key === "Enter") { finish(); removeEventListener("keydown", once); }
+    });
+  }
+  return { start };
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BOOTSTRAP
+   ═══════════════════════════════════════════════════════════════════════════ */
+(function init() {
+  if (matchMedia("(pointer:coarse)").matches) document.body.classList.add("touch");
+
+  Player.start();
+  Nav.start();
+  Wipe.build();
+  Boot.start();
+
+  document.getElementById("soundBtn").addEventListener("click", e => {
+    e.target.textContent = "SOUND: " + (Sound.toggle() ? "ON" : "OFF");
+  });
+
+  addEventListener("hashchange", () => {
+    const h = location.hash.replace("#", "");
+    SECTIONS[h] ? Router.open(h) : Router.close();
+  });
+
+  /* fonts can shift the sprite metrics — re-measure once they land */
+  document.fonts?.ready.then(() => Player.center());
+})();
+</script>
+</body>
+</html>
