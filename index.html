@@ -505,6 +505,7 @@ const EXPERIENCE = [
 const ACHIEVEMENTS = [
   "Built <b>CivicLedgerX</b>, a full-stack voice-enabled Financial ERP prototype, inside a 4-hour window at DotXathon 2026.",
   "Earned an <b>&lsquo;Elite&rsquo; category</b> certification (top-performing cohort) in NPTEL&rsquo;s E-Business course — weekly assignments plus a proctored final exam.",
+  "Graduated <b>AWS Academy Cloud Foundations</b> (20 course hours) with a verified digital badge on Credly.",
   "Represented <b>CHRIST University</b> at a National Level Online Essay Writing Competition.",
   "Technical volunteer with <b>Tech Tank</b> under the CAPS credit course at CHRIST (Deemed to be University).",
 ];
@@ -629,6 +630,11 @@ const CERTS = [
     meta:"Elite grade · Jul–Oct 2025 · 12-week course · consolidated score 62% (assignments 18.91/25, proctored exam 43.5/75) · 9,703 candidates certified",
     file:"nptel-ebusiness-elite.pdf",
     tags:["E-Business","Systems","Strategy","Elite Grade"] },
+  { title:"AWS Academy Graduate — Cloud Foundations", issuer:"AWS Academy · Amazon Web Services",
+    meta:"Training badge · 20 course hours · issued 19 Aug 2026 · verified digital badge on Credly",
+    file:"aws-academy-cloud-foundations.pdf",
+    url:"https://www.credly.com/go/sIrwWzXO",
+    tags:["AWS","Cloud Computing","Cloud Architecture","Digital Badge"] },
   { title:"45-Day Internship Programme in PHP Web Development", issuer:"The Lead Origin",
     meta:"4 Apr – 16 May 2025 · 45 days · Ref 2024070608 · recognised for outstanding contribution",
     file:"leadorigin-php-internship.jpg",
@@ -636,6 +642,18 @@ const CERTS = [
   { title:"Introducing Coding for Beginners — an HTML Online Course", issuer:"The Lead Origin",
     meta:"7 Sep – 7 Oct 2021 · instructor Mr. Shubham Kaushik", file:"leadorigin-html-course.jpeg",
     tags:["HTML","Web Fundamentals"] },
+  { title:"C Programming Course", issuer:"Infosys Springboard · Infosys Limited",
+    meta:"Course completion · completed 13 Jul 2024 · issued 2 Sep 2024 · QR-verifiable at verify.onwingspan.com",
+    file:"infosys-c-programming.pdf",
+    tags:["C","Programming Fundamentals","Procedural Programming"] },
+  { title:"Programming in Core Java", issuer:"Infosys Springboard · Infosys Limited",
+    meta:"Course completion · completed 29 Dec 2024 · issued 18 Jan 2025 · QR-verifiable at verify.onwingspan.com",
+    file:"infosys-core-java.pdf",
+    tags:["Java","Core Java","Object-Oriented Programming"] },
+  { title:"Python Foundation Certification", issuer:"Infosys Springboard · Infosys Limited",
+    meta:"Certificate of Achievement · completed &amp; issued 23 Jun 2026 · QR-verifiable at verify.onwingspan.com",
+    file:"infosys-python-foundation.pdf",
+    tags:["Python","Programming Fundamentals","Certification"] },
   { title:"Practical GenAI: Basics, Tools, Use Cases, Ethics, Future", issuer:"Udemy",
     meta:"27 Jul 2026 · 10.5 hours · instructor Yash Thakker",
     file:"udemy-practical-genai.pdf",
@@ -671,8 +689,9 @@ const CERTS = [
 /* ── Skills ──────────────────────────────────────────────────────────────── */
 const SKILLS = [
   { group:"Technical &amp; Software Development", items:[
-      { k:"Languages &amp; Core", v:["C#","Python","JavaScript","PHP","HTML5 / CSS3","Node.js"] },
+      { k:"Languages &amp; Core", v:["C#","C","Java","Python","JavaScript","PHP","HTML5 / CSS3","Node.js"] },
       { k:"Frameworks &amp; Web Architecture", v:["ASP.NET",".NET Framework 4.8","React","Windows Forms","E-Business Systems"] },
+      { k:"Cloud &amp; Infrastructure", v:["AWS Cloud Foundations","AWS Core Services","Cloud Computing Concepts"] },
       { k:"Tools &amp; IDEs", v:["Visual Studio 2022","Git &amp; GitHub","Digital Productivity Suite"] },
       { k:"Systems &amp; Security", v:["RBAC","IP / MAC Device Security","OTP Authentication","Ethical Hacking Fundamentals"] },
   ]},
@@ -689,8 +708,8 @@ const SKILLS = [
 ];
 
 /* Core verified skill chips shown at the top of the Certificates panel. */
-const CORE_SKILLS = ["C#","Python","JavaScript","PHP","HTML5 / CSS3","Node.js","ASP.NET","React",
-                     "Windows Forms","Visual Studio 2022","Ethical Hacking","Digital Strategy"];
+const CORE_SKILLS = ["C#","C","Java","Python","JavaScript","PHP","HTML5 / CSS3","Node.js","ASP.NET","React",
+                     "AWS Cloud","Windows Forms","Visual Studio 2022","Ethical Hacking","Digital Strategy"];
 
 /* Language → swatch colour for repo cards. */
 const LANG_COLOR = { Kotlin:"#a97bff", TypeScript:"#3178c6", JavaScript:"#f1c40f",
