@@ -625,12 +625,18 @@ const CERTS = [
   { title:"Technical Training Certificate (IIT Bombay)", issuer:"Corizo Edutech",
     meta:"Issued 16 Aug 2025 · valid for lifetime", file:"corizo-iit-bombay-training.jpeg",
     tags:["Technical Training","Engineering Principles","Research Foundations"] },
-  { title:"NPTEL &lsquo;Elite&rsquo; Certification in E-Business", issuer:"NPTEL",
-    meta:"Elite grade · Jul–Oct 2025 · weekly assignments + proctored final exam", file:null,
-    tags:["E-Business","Systems","Strategy"] },
+  { title:"NPTEL &lsquo;Elite&rsquo; Certification in E-Business", issuer:"NPTEL · IIT Kharagpur",
+    meta:"Elite grade · Jul–Oct 2025 · 12-week course · consolidated score 62% (assignments 18.91/25, proctored exam 43.5/75) · 9,703 candidates certified",
+    file:"nptel-ebusiness-elite.pdf",
+    tags:["E-Business","Systems","Strategy","Elite Grade"] },
   { title:"Introducing Coding for Beginners — an HTML Online Course", issuer:"The Lead Origin",
     meta:"7 Sep – 7 Oct 2021 · instructor Mr. Shubham Kaushik", file:"leadorigin-html-course.jpeg",
     tags:["HTML","Web Fundamentals"] },
+  { title:"Practical GenAI: Basics, Tools, Use Cases, Ethics, Future", issuer:"Udemy",
+    meta:"27 Jul 2026 · 10.5 hours · instructor Yash Thakker",
+    file:"udemy-practical-genai.pdf",
+    url:"https://ude.my/UC-95607f8e-b971-46dc-bb07-40d1e23bf5da",
+    tags:["Generative AI","AI Tools","AI Ethics"] },
   { title:"Android Mobile App Development — Gamecraft Workshop", issuer:"CHRIST (Deemed to be University), Bengaluru",
     meta:"Hands-on mobile development workshop", file:null,
     tags:["Android","Mobile Development","Workshop"] },
@@ -657,7 +663,7 @@ const SKILLS = [
       { k:"Systems &amp; Security", v:["RBAC","IP / MAC Device Security","OTP Authentication","Ethical Hacking Fundamentals"] },
   ]},
   { group:"Domain Expertise &amp; Innovation", items:[
-      { k:"Voice Integration &amp; AI", v:["Voice-Enabled Application Logic","AI Fraud Detection","Real-Time Analytics &amp; Reporting"] },
+      { k:"Voice Integration &amp; AI", v:["Voice-Enabled Application Logic","AI Fraud Detection","Real-Time Analytics &amp; Reporting","Generative AI Tools &amp; Ethics"] },
       { k:"Financial &amp; Business Systems", v:["Financial ERP Systems","E-Business","Business Simulation Logic"] },
       { k:"Digital Strategy &amp; Consulting", v:["Digital Marketing Strategy","Brand Positioning","Market Research &amp; Analysis"] },
       { k:"Cross-Disciplinary Technology", v:["Nanotechnology Foundations","Genetic Engineering Foundations"] },
@@ -1040,10 +1046,11 @@ const Content = {
               <p class="mt-2.5" style="font-size:14px;font-weight:600;color:#1c1e22">${c.issuer}</p>
               <p class="mt-1.5" style="font-size:13px;color:#4b4d52">${c.meta}</p>
               <div class="flex flex-wrap gap-2 mt-4">${badges(c.tags)}</div>
-              <div class="mt-5">
+              <div class="flex flex-wrap gap-3 mt-5">
                 ${c.file
                   ? `<a class="lbtn" href="${CONFIG.certDir}${encodeURIComponent(c.file)}" target="_blank" rel="noopener">VIEW CERTIFICATE ↗</a>`
                   : `<span class="lbtn" aria-disabled="true">ON REQUEST</span>`}
+                ${c.url ? `<a class="lbtn" href="${c.url}" target="_blank" rel="noopener">VERIFY ONLINE ↗</a>` : ""}
               </div>
             </div>
           </article>`).join("")}
@@ -1279,7 +1286,7 @@ const Router = (() => {
       overlay.classList.remove("on");
       current = null;
       history.replaceState(null, "", location.pathname + location.search);
-      Player.nudgeOff();
+      Player.reset();
       lastFocus?.focus?.({ preventScroll:true });
     });
   }
@@ -1325,6 +1332,7 @@ const Player = (() => {
   /* Spawn centred and clear of the folder row, whatever height it wraps to,
      so the player never lands on a folder and auto-opens it. */
   function center() {
+    measure();                          // width changes with the CSS clamp
     const r = desk.getBoundingClientRect();
     const row = document.getElementById("folders").getBoundingClientRect();
     const ideal = (row.top - r.top) - h - 34;
@@ -1435,11 +1443,21 @@ const Player = (() => {
 
   function setFrame(f) { if (frame !== f) { frame = f; el.src = frames[f]; } }
 
-  /* after closing a panel, don't instantly re-trigger the folder you're on */
-  function nudgeOff() {
-    cooled = 900; dwell = 0;
-    const bar = nearFolder?.querySelector(".charge i");
-    if (bar) bar.style.width = "0%";
+  /* After a section closes, put the player back in the middle of the desk.
+     Left standing on the folder they just came out of, the dwell timer would
+     simply re-open it — and there'd be no window to walk somewhere else.
+     This runs while the wipe still covers the screen, so it is never seen. */
+  function reset() {
+    folderEls().forEach(f => {
+      f.classList.remove("near");
+      const bar = f.querySelector(".charge i");
+      if (bar) bar.style.width = "0%";
+    });
+    nearFolder = null;
+    dwell = 0;
+    hint.style.opacity = "0";
+    keys.clear();          // drop any key held down when the panel opened
+    center();              // re-centres, clears the folder row, sets a cooldown
   }
 
   const KEYMAP = { ArrowLeft:"left", a:"left", A:"left", ArrowRight:"right", d:"right", D:"right",
@@ -1500,7 +1518,7 @@ const Player = (() => {
     if (!raf) raf = requestAnimationFrame(tick);
   }
 
-  return { start, nudgeOff, center };
+  return { start, reset, center };
 })();
 
 
