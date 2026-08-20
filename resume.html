@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shaurya Garg — Resume</title>
+<style>
+  /* ══ Single A4 sheet ═══════════════════════════════════════════════════ */
+  @page { size: A4; margin: 0; }
+
+  :root{
+    --ink:#111214;
+    --soft:#4a4d53;
+    --hair:#c9cbcf;
+    --accent:#b03428;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ background:#e8e8e4; }
+
+  body{
+    font-family:"Inter","Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);
+    font-size:8.4pt;
+    line-height:1.29;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sheet{
+    width:210mm;
+    height:297mm;
+    margin:10mm auto;
+    padding:9.5mm 9.5mm;
+    background:#fff;
+    box-shadow:0 2px 18px rgba(0,0,0,.18);
+    overflow:hidden;
+  }
+
+  /* ══ Header ════════════════════════════════════════════════════════════ */
+  header{ border-bottom:2.2pt solid var(--ink); padding-bottom:5pt; }
+
+  h1{
+    font-size:20.5pt;
+    font-weight:800;
+    letter-spacing:.06em;
+    line-height:1;
+    text-transform:uppercase;
+  }
+
+  .tagline{
+    margin-top:3.5pt;
+    font-size:9pt;
+    font-weight:600;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+
+  .contact{
+    margin-top:4.5pt;
+    font-size:8pt;
+    color:var(--soft);
+    white-space:nowrap;
+  }
+  .contact a{ color:var(--soft); text-decoration:none; }
+  .contact .sep{ color:var(--hair); margin:0 3.4pt; }
+
+  /* ══ Sections ══════════════════════════════════════════════════════════ */
+  section{ margin-top:7pt; }
+
+  h2{
+    font-size:8.2pt;
+    font-weight:800;
+    letter-spacing:.17em;
+    text-transform:uppercase;
+    padding-bottom:1.6pt;
+    border-bottom:.9pt solid var(--ink);
+    margin-bottom:4pt;
+  }
+
+  .entry{ margin-bottom:4.4pt; }
+  .entry:last-child{ margin-bottom:0; }
+
+  .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:8pt;
+  }
+
+  .role{ font-size:9.5pt; font-weight:700; }
+  .role .org{ font-weight:500; }
+  .role .flag{
+    font-size:6.8pt;
+    font-weight:800;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:#fff;
+    background:var(--accent);
+    padding:.8pt 3.4pt;
+    border-radius:1.5pt;
+    margin-left:4pt;
+    vertical-align:1.4pt;
+    white-space:nowrap;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  .when{ font-size:8pt; font-weight:600; color:var(--soft); white-space:nowrap; }
+
+  .meta{ font-size:8pt; font-style:italic; color:var(--soft); }
+
+  .stack{ font-size:8pt; color:var(--soft); }
+
+  ul{ list-style:none; margin-top:1.4pt; }
+
+  li{ position:relative; padding-left:8pt; margin-top:1.2pt; }
+  li::before{
+    content:"";
+    position:absolute;
+    left:1.4pt;
+    top:3.6pt;
+    width:2.4pt;
+    height:2.4pt;
+    background:var(--ink);
+    border-radius:50%;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  /* ══ Skills grid + bottom two-column band ══════════════════════════════ */
+  .kv{ display:grid; grid-template-columns:70pt 1fr; column-gap:6pt; row-gap:1.6pt; }
+  .kv dt{ font-weight:700; }
+  .kv dd{ color:#25272b; }
+
+  .band{ display:grid; grid-template-columns:1fr 1fr; column-gap:14pt; }
+  .band section{ margin-top:0; }
+
+  .issuer{ color:var(--soft); }
+
+  /* ══ Screen-only helper line ═══════════════════════════════════════════ */
+  .hint{
+    width:210mm; margin:0 auto 8mm; text-align:center;
+    font-size:8.5pt; color:#5c5f66; letter-spacing:.04em;
+  }
+
+  @media print{
+    html{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; height:auto; }
+    .hint{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <header>
+    <h1>Shaurya Garg</h1>
+    <p class="tagline">Full-Stack Developer &nbsp;·&nbsp; AI &amp; Cloud Systems</p>
+    <p class="contact">
+      Bengaluru, India
+      <span class="sep">|</span><a href="mailto:shauryagargynr007@gmail.com">shauryagargynr007@gmail.com</a>
+      <span class="sep">|</span><a href="https://github.com/Shauurrya">github.com/Shauurrya</a>
+      <span class="sep">|</span><a href="https://www.linkedin.com/in/shaurya-garg-82925a34b/">linkedin.com/in/shaurya-garg</a>
+      <span class="sep">|</span><a href="https://shauurrya-portfolio.vercel.app">shauurrya-portfolio.vercel.app</a>
+    </p>
+  </header>
+
+  <section>
+    <h2>Professional Summary</h2>
+    <p>BCA student at CHRIST (Deemed to be University) who ships products end to end &mdash; Next.js and React front ends, ASP.NET, Express and Node.js services over PostgreSQL, Kotlin on Android, and Python for the data and AI layers. Lead contributor on a four-person AI skill-certification platform, built a voice-enabled financial ERP inside a four-hour hackathon, and released an Android health-analytics engine. AWS Academy Cloud Foundations graduate with an NPTEL &lsquo;Elite&rsquo; grade, seeking software engineering work in applied AI systems and scalable cloud applications.</p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="row">
+      <span class="role">Bachelor of Computer Applications (BCA) &mdash; <span class="org">CHRIST (Deemed to be University), Bengaluru</span></span>
+      <span class="when">2024 &ndash; 2027 (Expected)</span>
+    </div>
+    <p class="meta">Technical volunteer, Tech Tank &mdash; CAPS credit course &nbsp;·&nbsp; Android Mobile App Development, Gamecraft workshop</p>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+
+    <div class="entry">
+      <div class="row">
+        <span class="role">Digital Marketing Consultant &mdash; <span class="org">Clever Harvey, JuniorMBA Programme</span></span>
+        <span class="when">Client brand: Puma</span>
+      </div>
+      <ul>
+        <li>Consulted on a live Puma brand challenge, applying strategic marketing frameworks to a real commercial problem rather than a case study.</li>
+        <li>Assessed brand positioning and campaign strategy, turning market research into actionable, evidence-backed recommendations.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="row">
+        <span class="role">Research Intern, Nanotechnology &amp; Genetic Engineering &mdash; <span class="org">Corizo Edutech</span></span>
+        <span class="when">2025</span>
+      </div>
+      <ul>
+        <li>Ran a research internship across nanotechnology and genetic engineering, sharpening analytical reasoning and structured problem solving.</li>
+        <li>Completed the associated IIT Bombay&ndash;affiliated technical training in engineering principles and research foundations.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="row">
+        <span class="role">PHP Web Development Intern &mdash; <span class="org">The Lead Origin</span></span>
+        <span class="when">Apr &ndash; May 2025</span>
+      </div>
+      <ul>
+        <li>45-day hands-on backend internship building PHP web applications; recognised for outstanding contribution (Ref 2024070608).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+
+    <div class="entry">
+      <div class="row">
+        <span class="role">7-Kaam<span class="flag">Lead Contributor</span> <span class="stack">&mdash; TypeScript, Next.js 14, Express 5, Prisma, PostgreSQL, Redis, Flutter</span></span>
+        <span class="when">Team of 4 &nbsp;·&nbsp; 16 of 34 commits</span>
+      </div>
+      <ul>
+        <li>AI-powered skill certification platform for trade workers: an Express 5 and Prisma API over PostgreSQL with Redis caching and BullMQ queues, feeding a Next.js 14 analytics dashboard and Flutter worker and customer apps.</li>
+        <li>Owned backend services, role-based authentication and the verification workflows and data systems behind worker onboarding.</li>
+        <li>Built a deterministic video <b>Trust Engine</b> fusing identity, tool, task and safety evidence into explainable decision bands &mdash; 153 tests across 22 fixtures.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="row">
+        <span class="role">CivicLedgerX <span class="stack">&mdash; ASP.NET, C#, .NET 4.8, React, Node.js, Python, Windows Forms</span></span>
+        <span class="when">DotXathon 2026 &nbsp;·&nbsp; 4-hour build</span>
+      </div>
+      <ul>
+        <li>Voice-enabled financial ERP: spoken instructions post journal entries, payments, purchases, sales and ledger records hands-free, backed by a business-simulation engine and a real-time analytics dashboard.</li>
+        <li>Guarded every transaction with multi-organisation RBAC, OTP authentication bound to device IP and MAC, and an AI layer flagging suspicious activity across live transaction streams.</li>
+        <li>Shipped twice inside the four-hour window &mdash; a web build and a Windows Forms desktop prototype in Visual Studio 2022.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="row">
+        <span class="role">VitalCoreAI <span class="stack">&mdash; Kotlin, Android, Health Connect, Samsung Health, Google Fit</span></span>
+        <span class="when">APK released</span>
+      </div>
+      <ul>
+        <li>Android biometric analytics engine computing Readiness, Recovery, Day Strain, Sleep Debt, Biological Age and ACWR training load from Health Connect data &mdash; without a subscription wearable.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="row">
+        <span class="role">Inventra &amp; F1-2026-Intelligence <span class="stack">&mdash; Next.js 14, TypeScript, PostgreSQL, Prisma, Python</span></span>
+        <span class="when">Both deployed</span>
+      </div>
+      <ul>
+        <li><b>Inventra:</b> cloud inventory SaaS for Indian manufacturing MSMEs &mdash; raw-material tracking, bill-of-materials production deductions, finished-goods and sales management, and low-stock alerts.</li>
+        <li><b>F1-2026-Intelligence:</b> race-intelligence dashboard bundling a Bayesian engine, ML pace regression, Markov lap simulation, aero and engine models, and grid-penalty prediction.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technical Skills</h2>
+    <dl class="kv">
+      <dt>Languages</dt><dd>C#, C, Java, Python, JavaScript, TypeScript, Kotlin, PHP, SQL</dd>
+      <dt>Web</dt><dd>React, Next.js 14, Node.js, Express 5, ASP.NET / .NET Framework 4.8, HTML5, CSS3, Streamlit</dd>
+      <dt>Data &amp; Cloud</dt><dd>PostgreSQL, Prisma, Redis, BullMQ, Pandas, AWS (Cloud Foundations), Vercel</dd>
+      <dt>Mobile &amp; Tools</dt><dd>Android, Health Connect, Flutter, Git &amp; GitHub, Visual Studio 2022</dd>
+      <dt>Systems &amp; AI</dt><dd>Role-based access control, OTP and device-bound auth, AI fraud detection, real-time analytics, generative-AI tooling</dd>
+    </dl>
+  </section>
+
+  <div class="band" style="margin-top:7pt">
+    <section>
+      <h2>Certifications</h2>
+      <ul>
+        <li><b>AWS Academy Graduate &mdash; Cloud Foundations</b> <span class="issuer">&middot; AWS, 2026</span></li>
+        <li><b>NPTEL &lsquo;Elite&rsquo; &mdash; E-Business</b> <span class="issuer">&middot; IIT Kharagpur, 2025</span></li>
+        <li><b>Python Foundation, Core Java, C Programming</b> <span class="issuer">&middot; Infosys</span></li>
+        <li><b>PHP Web Development Internship</b> <span class="issuer">&middot; The Lead Origin, 2025</span></li>
+        <li><b>Technical Training Certificate</b> <span class="issuer">&middot; IIT Bombay / Corizo</span></li>
+        <li><b>Practical GenAI</b> <span class="issuer">&middot; Udemy, 2026</span> &nbsp;|&nbsp; <b>JuniorMBA</b> <span class="issuer">&middot; Clever Harvey</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Achievements</h2>
+      <ul>
+        <li>Built <b>CivicLedgerX</b>, a voice-enabled financial ERP, inside a four-hour window at DotXathon 2026.</li>
+        <li><b>NPTEL &lsquo;Elite&rsquo;</b> grade &mdash; top cohort of 9,703 candidates.</li>
+        <li>Scored <b>100%</b> in a National Level Online Quiz Competition.</li>
+        <li>Represented CHRIST University at a National Level Essay Writing Competition.</li>
+      </ul>
+    </section>
+  </div>
+
+</div>
+
+<p class="hint">Print or save as PDF &mdash; Ctrl + P, A4, margins &ldquo;None&rdquo;, background graphics on.</p>
+
+</body>
+</html>
