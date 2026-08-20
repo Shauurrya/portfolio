@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Shaurya Garg — Resume</title>
 <style>
-  /* ══ Single A4 sheet ═══════════════════════════════════════════════════ */
+  /* ══ A4 sheet (may span multiple pages) ════════════════════════════════ */
   @page { size: A4; margin: 0; }
 
   :root{
@@ -29,12 +29,10 @@
 
   .sheet{
     width:210mm;
-    height:297mm;
     margin:10mm auto;
     padding:9.5mm 9.5mm;
     background:#fff;
     box-shadow:0 2px 18px rgba(0,0,0,.18);
-    overflow:hidden;
   }
 
   /* ══ Header ════════════════════════════════════════════════════════════ */
@@ -134,8 +132,8 @@
   .kv dt{ font-weight:700; }
   .kv dd{ color:#25272b; }
 
-  .band{ display:grid; grid-template-columns:1fr 1fr; column-gap:14pt; }
-  .band section{ margin-top:0; }
+  .certgrid{ display:grid; grid-template-columns:1fr 1fr; column-gap:13pt; align-content:start; }
+  .certgrid li{ font-size:8.1pt; }
 
   .issuer{ color:var(--soft); }
 
@@ -278,29 +276,24 @@
     </dl>
   </section>
 
-  <div class="band" style="margin-top:7pt">
-    <section>
-      <h2>Certifications</h2>
-      <ul>
-        <li><b>AWS Academy Graduate &mdash; Cloud Foundations</b> <span class="issuer">&middot; AWS, 2026</span></li>
-        <li><b>NPTEL &lsquo;Elite&rsquo; &mdash; E-Business</b> <span class="issuer">&middot; IIT Kharagpur, 2025</span></li>
-        <li><b>Python Foundation, Core Java, C Programming</b> <span class="issuer">&middot; Infosys</span></li>
-        <li><b>PHP Web Development Internship</b> <span class="issuer">&middot; The Lead Origin, 2025</span></li>
-        <li><b>Technical Training Certificate</b> <span class="issuer">&middot; IIT Bombay / Corizo</span></li>
-        <li><b>Practical GenAI</b> <span class="issuer">&middot; Udemy, 2026</span> &nbsp;|&nbsp; <b>JuniorMBA</b> <span class="issuer">&middot; Clever Harvey</span></li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Achievements</h2>
-      <ul>
-        <li>Built <b>CivicLedgerX</b>, a voice-enabled financial ERP, inside a four-hour window at DotXathon 2026.</li>
-        <li><b>NPTEL &lsquo;Elite&rsquo;</b> grade &mdash; top cohort of 9,703 candidates.</li>
-        <li>Scored <b>100%</b> in a National Level Online Quiz Competition.</li>
-        <li>Represented CHRIST University at a National Level Essay Writing Competition.</li>
-      </ul>
-    </section>
-  </div>
+  <section>
+    <h2>Certifications &amp; Awards</h2>
+    <ul class="certgrid">
+      <li><b>AWS Academy Cloud Foundations</b><span class="issuer"> &middot; AWS, Aug 2026 &middot; 20 hrs, Credly</span></li>
+      <li><b>NPTEL &lsquo;Elite&rsquo; &mdash; E-Business</b><span class="issuer"> &middot; IIT Kharagpur, Jul&ndash;Oct 2025 &middot; 12 wks</span></li>
+      <li><b>JuniorMBA in Digital Marketing</b><span class="issuer"> &middot; Clever Harvey &middot; client Puma</span></li>
+      <li><b>Nano Tech &amp; Genetic Engineering Research</b><span class="issuer"> &middot; Corizo Edutech</span></li>
+      <li><b>Technical Training Certificate</b><span class="issuer"> &middot; IIT Bombay / Corizo, Aug 2025</span></li>
+      <li><b>45-Day PHP Web Dev Internship</b><span class="issuer"> &middot; The Lead Origin, Apr&ndash;May 2025</span></li>
+      <li><b>Python Foundation Certification</b><span class="issuer"> &middot; Infosys Springboard, Jun 2026</span></li>
+      <li><b>Programming in Core Java</b><span class="issuer"> &middot; Infosys Springboard, Dec 2024</span></li>
+      <li><b>C Programming Course</b><span class="issuer"> &middot; Infosys Springboard, Jul 2024</span></li>
+      <li><b>Practical GenAI: Tools &amp; Ethics</b><span class="issuer"> &middot; Udemy, Jul 2026 &middot; 10.5 hrs</span></li>
+      <li><b>Tech Tank Volunteer &mdash; CAPS Course</b><span class="issuer"> &middot; CHRIST University</span></li>
+      <li><b>National Level Quiz &mdash; 100% Score</b><span class="issuer"> &middot; Guru Nanak Khalsa, Mar 2025</span></li>
+      <li><b>National Level Essay Competition</b><span class="issuer"> &middot; Guru Nanak Khalsa College</span></li>
+    </ul>
+  </section>
 
 </div>
 
