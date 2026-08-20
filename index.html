@@ -539,6 +539,19 @@ const FEATURED = {
 /* ── Curated repo copy. Live GitHub data is merged over this at runtime. ─── */
 const REPOS = [
   {
+    name:"7-Kaam",
+    badge:"LEAD CONTRIBUTOR",
+    desc:"AI-powered skill certification platform for trade workers, built with a four-person team "
+       + "(lead contributor, 16 of 34 commits). An Express 5 and Prisma API over PostgreSQL with Redis "
+       + "caching and BullMQ queues, a Next.js 14 analytics dashboard, Flutter customer and worker apps, "
+       + "and a deterministic video Trust Engine that fuses identity, tool, task and safety evidence into "
+       + "explainable decision bands — 153 tests across 22 fixtures.",
+    stack:["TypeScript","Next.js 14","Express 5","Prisma","Flutter","Python"],
+    lang:"TypeScript",
+    repo:"https://github.com/YashRajRajawat/7-Kaam",
+    demo:null,
+  },
+  {
     name:"VitalCoreAI",
     desc:"Biometric analytics and recovery engine for Android. Interfaces with Health Connect "
        + "(plus Samsung Health / Google Fit) to compute Readiness, Recovery, Day Strain, Sleep Debt, "
@@ -1029,7 +1042,10 @@ const Content = {
       <article class="rcard p-6 flex flex-col fade-up" style="animation-delay:${Math.min(i * .05, .4)}s">
         <div class="flex items-start justify-between gap-4">
           <h4 class="font-pixel" style="font-size:11px;letter-spacing:.05em;line-height:1.6;word-break:break-word">${esc(r.name)}</h4>
-          ${r.stars ? `<span class="badge" title="Stars">★ ${r.stars}</span>` : ""}
+          <div class="flex items-center gap-2">
+            ${r.badge ? `<span class="badge badge-solid">${esc(r.badge)}</span>` : ""}
+            ${r.stars ? `<span class="badge" title="Stars">★ ${r.stars}</span>` : ""}
+          </div>
         </div>
         <p class="copy mt-4" style="font-size:14.5px;flex:1">${r.desc}</p>
         <div class="flex flex-wrap gap-2 mt-5">${badges(r.stack)}</div>
