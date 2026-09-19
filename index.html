@@ -552,15 +552,33 @@ const REPOS = [
     demo:null,
   },
   {
+    name:"TrustBuy-AI",
+    desc:"Browser-based website URL trust checker powered by AI — analyzes URLs for phishing, scam indicators "
+       + "and legitimacy signals entirely in-browser with no backend required. Built with Next.js 15.",
+    stack:["Next.js 15","Python","AI","Browser Extension"],
+    lang:"Python",
+    repo:"https://github.com/Shauurrya/TrustBuy-AI",
+    demo:"https://trustbuy-ai-liard.vercel.app",
+  },
+  {
     name:"VitalCoreAI",
     desc:"Biometric analytics and recovery engine for Android. Interfaces with Health Connect "
        + "(plus Samsung Health / Google Fit) to compute Readiness, Recovery, Day Strain, Sleep Debt, "
        + "Biological Age and ACWR training load — without a subscription wearable.",
-    stack:["Kotlin","Android","Health Connect","MIT"],
+    stack:["Kotlin","Android","Health Connect","ML"],
     lang:"Kotlin",
     repo:"https://github.com/Shauurrya/VitalCoreAI",
     demo:"https://github.com/Shauurrya/VitalCoreAI/releases/latest",
     demoLabel:"DOWNLOAD APK",
+  },
+  {
+    name:"gesture-strike",
+    desc:"Real-time computer-vision arcade game controlled entirely through hand gestures — "
+       + "point, swipe and strike using your webcam. No controllers needed.",
+    stack:["TypeScript","MediaPipe","Canvas","Webcam"],
+    lang:"TypeScript",
+    repo:"https://github.com/Shauurrya/gesture-strike",
+    demo:"https://gesture-strike.vercel.app",
   },
   {
     name:"handstrike",
@@ -569,6 +587,24 @@ const REPOS = [
     lang:"JavaScript",
     repo:"https://github.com/Shauurrya/handstrike",
     demo:"https://handstrike.vercel.app/",
+  },
+  {
+    name:"private-pdf-studio",
+    desc:"Privacy-first, client-side PDF editor — merge, split, compress, annotate and sign PDFs "
+       + "entirely in the browser. 100% local processing: no files are ever uploaded to any server.",
+    stack:["TypeScript","Next.js","PDF.js","Client-Side"],
+    lang:"TypeScript",
+    repo:"https://github.com/Shauurrya/private-pdf-studio",
+    demo:"https://private-pdf-studio.vercel.app",
+  },
+  {
+    name:"mars_rover",
+    desc:"Interactive Mars Rover simulation and visualisation — models rover navigation, terrain mapping "
+       + "and mission planning on Martian surface data, deployed as a live web app.",
+    stack:["Python","Streamlit","Simulation","Data Viz"],
+    lang:"Python",
+    repo:"https://github.com/Shauurrya/mars_rover",
+    demo:"https://marsrover-three.vercel.app",
   },
   {
     name:"inventra",
@@ -590,12 +626,12 @@ const REPOS = [
     demo:"https://shauurrya.github.io/F1-2026-Intelligence/",
   },
   {
-    name:"student-marks-dashboard",
-    desc:"Interactive student marks analysis dashboard in Streamlit: CSV upload with validation and a "
-       + "sample template, KPI metrics, subject-wise trend visualisation and individual progress tracking.",
-    stack:["Python","Streamlit","Pandas","Data Viz"],
+    name:"Advanced-Python",
+    desc:"Nine advanced Python programs spanning the Stock Market Exchange domain (P1 – P10): "
+       + "real-time data ingestion, algorithmic trading logic, portfolio analytics and reporting.",
+    stack:["Python","Data Analysis","Finance","Algorithms"],
     lang:"Python",
-    repo:"https://github.com/Shauurrya/student-marks-dashboard",
+    repo:"https://github.com/Shauurrya/Advanced-Python",
     demo:null,
   },
   {
@@ -607,6 +643,15 @@ const REPOS = [
     lang:"JavaScript",
     repo:"https://github.com/Shauurrya/RetroArcadeOS",
     demo:"https://retro-arcade-os.vercel.app/",
+  },
+  {
+    name:"student-marks-dashboard",
+    desc:"Interactive student marks analysis dashboard in Streamlit: CSV upload with validation and a "
+       + "sample template, KPI metrics, subject-wise trend visualisation and individual progress tracking.",
+    stack:["Python","Streamlit","Pandas","Data Viz"],
+    lang:"Python",
+    repo:"https://github.com/Shauurrya/student-marks-dashboard",
+    demo:null,
   },
   {
     name:"pooja-jaiswwal-garg-synergy",
@@ -628,13 +673,19 @@ const REPOS = [
   },
   {
     name:"streamlitdeploy",
-    desc:"Deployment sandbox used for hosting and testing Streamlit builds.",
+    desc:"Deployment sandbox used for hosting and testing Streamlit builds on Streamlit Cloud.",
     stack:["Python","Streamlit","Deployment"],
     lang:"Python",
     repo:"https://github.com/Shauurrya/streamlitdeploy",
     demo:null,
   },
 ];
+
+/* Repos to exclude from the live GitHub feed (profile READMEs, the portfolio itself, etc.) */
+const EXCLUDED_REPOS = new Set([
+  "shauurrya",   // profile README repo
+  "portfolio",   // this site's own repo
+]);
 
 /* ── Certificates ────────────────────────────────────────────────────────── */
 const CERTS = [
@@ -925,7 +976,7 @@ const Content = {
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 fade-up" style="animation-delay:.18s">
         <div class="stat"><b>2024–27</b><span>BCA</span></div>
         <div class="stat"><b>${EXPERIENCE.length}</b><span>INTERNSHIPS</span></div>
-        <div class="stat"><b>9+</b><span>PROJECTS</span></div>
+        <div class="stat"><b>15+</b><span>PROJECTS</span></div>
         <div class="stat"><b>${CERTS.length}</b><span>CERTIFICATES</span></div>
       </div>
 
@@ -1201,7 +1252,7 @@ const GitHubFeed = (() => {
       const raw = await res.json();
 
       const byName = new Map(REPOS.map(r => [r.name.toLowerCase(), { ...r, curated: true }]));
-      raw.filter(r => !r.fork).forEach(r => {
+      raw.filter(r => !r.fork && !EXCLUDED_REPOS.has(r.name.toLowerCase())).forEach(r => {
         const key = r.name.toLowerCase();
         const cur = byName.get(key) || {
           name: r.name,
